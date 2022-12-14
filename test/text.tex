@@ -1,0 +1,119 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[draft,bleed=3mm,grid,graphpaper,color=cyan]{xput}
+\usepackage{lipsum}
+\usepackage{ragged2e}
+
+\margin=5mm
+\pagewidth=10cm
+\pageheight=10cm
+\gutter=10mm
+
+\begin{document}
+
+  \page{
+    \text[center,parbox]{
+      \fontsize{36.8mm}{28mm}\selectfont
+      \hskip -1mm
+      \textbf{Xput}
+      \vskip 4mm%
+      \fontsize{10.7mm}{9.5mm}\selectfont%
+      \hskip -1mm
+      \mbox{\textbf{for lazy designers}}
+    }
+    \place{0 0 1 1}
+    \text[center,color=magenta,opacity=0.5]{
+      \fontsize{36.8mm}{28mm}\selectfont
+      \hskip -1mm
+      \textbf{Xput}
+      \vskip 4mm%
+      \fontsize{10.7mm}{9.5mm}\selectfont%
+      \hskip -1mm
+      \mbox{\textbf{for lazy designers}}
+    }
+  }
+
+  \page{
+    \setgrid{{{1}{1}}{{1}{1}}}
+    \text[parbox]{
+      \lipsum[1][1-3]
+    }
+    \place{0 0 1 1}
+    \text[color=magenta,opacity=0.5]{
+      \lipsum[1][1-3]
+    }
+    \text[parbox,center]{
+      \centering
+      \lipsum[1][1-3]
+    }
+    \place{0 1 1 2}
+    \text[center,color=magenta,opacity=0.5]{
+      \centering
+      \lipsum[1][1-3]
+    }
+    \text[parbox,center]{
+      \RaggedRight
+      \lipsum[1][1-3]
+    }
+    \place{1 0 2 1}
+    \text[center,color=magenta,opacity=0.5]{
+      \RaggedRight
+      \lipsum[1][1-3]
+    }
+    \text[parbox,bottom]{
+      \RaggedLeft
+      \lipsum[1][1-3]
+    }
+    \place{1 1 2 2}
+    \text[bottom,color=magenta,opacity=0.5]{
+      \RaggedLeft
+      \lipsum[1][1-3]
+    }
+  }
+
+  \page{
+    \text[parbox]{
+      \section*{Lorem Ipsum}
+      \lipsum[1][1-3]
+      \section*{Nam Arcu Libero}
+      \lipsum[1][4-6]
+    }
+    \place{0 0 1 1}
+    \text[color=magenta,opacity=0.5]{
+      \section*{Lorem Ipsum}
+      \lipsum[1][1-3]
+      \section*{Nam Arcu Libero}
+      \lipsum[1][4-6]
+    }
+  }
+
+  % \page{
+  %   \text[parbox]{
+  %     \section*{Lorem Ipsum}
+  %     \lipsum[1][1-3]
+  %     \section*{Nam Arcu Libero}
+  %     \lipsum[1][4-6]
+  %   }
+  %   \place{0 0 1 1}
+  %   \text[color=magenta,opacity=0.5]{
+  %     \strut
+  %     \section*{Lorem Ipsum}
+  %     \lipsum[1][1-3]
+  %     \section*{Nam Arcu Libero}
+  %     \lipsum[1][4-6]
+  %   }
+  % }
+
+\end{document}

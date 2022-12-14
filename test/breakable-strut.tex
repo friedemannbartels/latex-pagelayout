@@ -1,0 +1,88 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[bleed=3mm,grid,graphpaper]{xput}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage{sectsty}
+\usepackage{tgheros}
+\usepackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault}
+
+
+\margin=5mm
+\bottommargin=22mm
+\topmargin=10mm
+\pagewidth=10cm
+\pageheight=10cm
+\gutter=4mm
+
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{.83\baselineskip}{0.52\baselineskip}
+
+\newtemplate{two col}{
+  \setgrid{{{1}{1}}}
+  \usetext
+  \usetext
+  \place{0 0 1 1}
+  \usetext[fix]
+  \place{0 1 1 2}
+  \usetext[fix]
+}
+
+\begin{document}
+
+  \page{
+    \setgrid{{{1}{1}}}
+    \text[breakable,color=cyan,opacity=1]{
+      \strut
+      \section*{Intro}
+      \lipsum[1]
+      \section*{Main}
+      \lipsum[2]
+      \newpage
+      \strut
+      \section*{Outro}
+      \lipsum[3]
+      \par
+      \lipsum[4]
+    }
+    \usetext
+    \place{0 0 1 1}
+    \text[breakable,name=fix,color=magenta,opacity=1]{
+      \strut
+      \section*{Intro}
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentes-que habitant morbi tristique s\strut enectus et netus et malesuada fam\strut es ac turpis ege-stas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Pha-sellus eu tellus sit amet tor-tor gravida placerat. Integer sapien est, iaculis in, pre-tium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Do-n\strut ec varius orci eget risus. Duis ni\strut bh mi, congue eu, a\strut ccumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim ru-trum.
+      \section*{Main}
+      Nam dui ligula, fringilla a, euismod sodales, sollicitu-din vel, wisi. Morbi auctor lorem non justo. Nam la-cus libero, pretium at, lobor-tis vitae, ultricies et, tellus. \strut Donec aliquet, tortor sed ac-cumsan bibendum, erat li-gula al\strut iquet magna, vitae or-nare o\strut dio metus a mi. Morbi ac orci et nisl hendrerit mol-lis. Suspendisse ut massa. Cras nec ante. Pellentes-que a nulla. Cum sociis na-toque penatibus et magnis dis parturient montes, na-scetur ridiculus mus. Ali-quam tincidunt urna. Nulla ullamcorper vestibulum tur-pis. Pellentesque cursus luctus mauris.
+      \newpage
+      \strut
+      \section*{Outro}
+      Nulla malesuada porttitor diam. Donec felis erat, con-gue non, volutpat at, tinci-dunt tristique, libero. Viva-mus viverra fermentum fe-lis. Donec nonummy pellen-tesque ante. Phasellus adi-piscing semper elit. Proin fermentum massa ac quam. Sed diam turpis, molestie vitae, placerat a, molestie n\strut ec, leo. Maecenas la-cinia. N\strut am ipsum ligula, eleifend at, accumsan nec, suscipit a, ipsum. Morbi blandit ligula feugiat magna. Nunc eleifend consequat lo-rem. Sed lacinia nulla vi-tae enim. Pellentesque tin-cidunt purus vel magna. In-teger non enim. Praesent euismod nunc eu purus. Do-nec bibendum quam in tel-lus. Nullam cursus pulvinar lectus. Donec et mi. Nam vulputate metus eu enim. Vestibulum pellentesque fe-l\strut is eu massa.
+      \par
+Qui\strut sque ullamcorper place-rat i\strut psum. Cras nibh. Morbi vel justo vitae lacus tinci-dunt ultrices. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In hac ha-bitasse platea dictumst. In-teger tempus convallis au-gue. Etiam facilisis. Nunc elementum fermentum wisi. Aenean placerat. Ut imper-diet, enim sed gravida sol-licitudin, felis odio placerat quam, ac pulvinar elit purus eget enim. Nunc vitae tortor. P\strut roin tempus nibh sit amet nisl. Vivamus quis to\strut rtor vi-tae risus porta vehicula.
+      % \lipsum[3]
+      % \par
+      % \lipsum[4]
+    }
+    \place{0 1 1 2}
+    \usetext[fix]
+  }
+
+  \template{two col}{}
+  \template{two col}{}
+  \template{two col}{}
+
+\end{document}

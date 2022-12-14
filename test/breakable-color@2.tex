@@ -1,0 +1,87 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[bleed=3mm,grid,graphpaper,page color=black,color=white]{xput}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage{sectsty}
+\usepackage{fontspec}
+\renewcommand*\familydefault{\sfdefault}
+\setsansfont{TeX Gyre Heros}
+
+\margin=5mm
+\bottommargin=23mm
+\topmargin=10mm
+\pagewidth=10cm
+\pageheight=10cm
+\gutter=4mm
+
+\def\topsectionstyle#1{\sectionfont{\ \vskip\dimexpr12pt+1.34pt\relax\addfontfeatures{Color=#1}}}
+\def\inlinesectionstyle#1{\sectionfont{\vskip 0pt\addfontfeatures{Color=#1}}}
+
+\newtemplate{two col}{
+  \setgrid{{{1}{1}}}
+  \placeholder{}
+  \placeholder{}
+}
+
+\begin{document}
+
+  \page{
+    \setgrid{{{1}{1}}}
+    \text[breakable]{
+      \topsectionstyle{white}
+      \tableofcontents
+      \newpage
+      \section{Intro}
+      \lipsum[1]
+      \inlinesectionstyle{yellow}
+      \section{Main}
+      \color{yellow}
+      \addfontfeatures{Color=yellow}
+      \lipsum[2]
+      \newpage
+      \color{white}
+      \addfontfeatures{Color=white}
+      \topsectionstyle{white}
+      \section{Outlook}
+      \lipsum[3]
+      \par
+      \lipsum[4]
+    }
+    \usetext
+  }
+
+  \template{two col}{
+    \usetext
+    \usetext
+  }
+
+  \template{two col}{
+    \usetext
+    \usetext
+  }
+
+  \template{two col}{
+    \graphic{1x1}
+    \usetext
+  }
+
+  \template{two col}{
+    \usetext
+    \usetext
+  }
+
+\end{document}

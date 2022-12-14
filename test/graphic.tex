@@ -1,0 +1,158 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[twoside,beginright,grid,fanfold,innerbleed=5mm,outerbleed=15mm,topbleed=10mm,safetymargin=0mm,gutter=16mm,safezone,placeholder]{xput}
+
+\pagewidth=200mm
+\pageheight=200mm
+
+\newborder{primar y}{width=6mm,radius=30mm,color=green,opacity=0.5}
+\newborder{secondary}{radius=8mm}
+\newborder{red}{width=4mm,color=red}
+
+\newdimen\borderradius
+\borderradius=24mm
+\newdimen\borderwidth
+\borderwidth=2mm
+\def\borderopacity{0.3}
+
+\setborder[width=\borderwidth]{}
+
+\begin{document}
+
+  \template[margin=20mm]{f}{
+    \graphic[hpos=0.9,scale=2,vpos=0,border=primar y]{3x2}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[vpos=1,border=secondary,border width=\borderwidth]{2x3}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[hpos=0.4,scale=3,border width=4mm,border radius=16mm]{2x1}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic{2x1}
+  }
+
+  \setborder[radius=20mm]{}
+
+  \page{
+    \place{0 0 1 1}
+    \graphic{2x1}
+  }
+
+  \setborder[radius=8mm]{red}
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=4]{2x1}
+  }
+
+  \noborder
+
+  \page{
+    \setgrid{
+      {{1}{1}}
+      {{1}{1}}
+    }
+    \graphic{2x1}
+    \setborder[opacity=0.5]{red}
+    \graphic[hpos=0]{2x1}
+    \setborder{}
+    \graphic{2x1}
+    \setborder[radius=20mm,width=2mm]{}
+    \graphic[border color=cyan,border opacity=0.5]{2x1}
+  }
+
+  \newtemplate{with border}{
+    \setgrid{
+      {{1}{1}}
+      {{1}{1}}
+    }
+    \placeholder[2]{}
+    \placeholder[1]{}
+    \setborder{}
+    \placeholder[3]{}
+    \setborder[radius=\borderradius,width=2mm]{}
+    \placeholder[4]{}
+  }
+  \template{with border}{
+    \graphic{1x1}
+    \graphic[hpos=0,border radius=10mm,border width=2mm,border color=blue]{2x1}
+    \graphic[hpos=1,border=primar y,border width=3mm]{2x1}
+    \graphic[border opacity=\borderopacity]{1x2}
+  }
+
+  \newtemplate{ss-ss 2}{
+    \setgrid{
+      {{1}{1}}
+      {{1}{1}}
+    }
+    \setborder[opacity=0.5]{red}
+    \placeholder{0 0 1 1}
+    \placeholder{0 1 1 2}
+    \setborder{}
+    \placeholder{1 0 2 1}
+    \setborder[radius=2mm,width=2mm]{}
+    \placeholder{1 1 2 2}
+  }
+  \template{ss-ss 2}{
+    \graphic{3x2}
+    \setborder[radius=2mm,width=2mm]{}
+    \graphic{2x1}
+    \setborder[opacity=0.3,color=green]{red}
+    \graphic{2x3}
+    \graphic[border radius=9mm]{1x1}
+  }
+
+  \setborder{red}
+
+  \template{sss-sss-sss}{
+    \graphic[border=secondary,border color=yellow,border width=4mm]{1x1}
+    \graphic{2x3}
+    \graphic[border=secondary,border width=2mm,border color=black]{2x3}
+    \setborder{secondary}
+    \graphic{}
+    \graphic{1x1}
+  }
+
+  \setpagegraphic[scale=1.5]{2x1}
+
+  \template{w}{}
+
+  \nopagegraphic
+  \noborder
+
+  \newgraphic{3x2a}{scale=4,file=3x2}
+  \template[page graphic=3x2a]{s}{
+    \graphic[border radius=0.5\width,border color=cyan,border opacity=0.2,border width=10mm]{3x2}
+  }
+
+  \newgraphic{2x3a}{scale=2,file=2x3}
+  \page[page graphic=3x2a]{
+    \place{0 0 1 1}
+    \graphic[scale=2]{2x3a}
+  }
+
+  \template[page graphic=3x2a,page color=pink]{ppp}{
+    \graphic{2x3}
+    \graphic{2x3}
+  }
+
+\end{document}

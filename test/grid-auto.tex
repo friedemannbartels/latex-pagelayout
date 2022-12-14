@@ -1,0 +1,117 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[draft,bleed=3mm,pagecolor=black,color=white,grid,twoside]{xput}
+
+\margin=5mm
+\pagewidth=10cm
+\pageheight=10cm
+
+\graphicspath{{images}}
+
+\newtemplate{my tpl}{
+  \setgrid[
+    gutter=5mm
+  ]{{{1}{1}} {{1}{1}{1}{1}}}
+
+  \placeholder[1]{0 0 1.7 1.4}
+  \placeholder[3]{}
+  \placeholder[4]{}
+  \placeholder[2]{0 1 1 2}
+  \placeholder[5]{1 1 1.5 2}
+  \placeholder[6]{}
+
+  \setgrid[gutter=5mm]{{{1}{1}}{{1}}}
+  \text[bottom]{1}
+  \text[bottom]{2}
+  \text[bottom]{3}
+  \text{OVERFLOW}
+}
+\newtemplate{my tpl 2}{
+  \setgrid{{{2}{1}}{{2}{1}}}
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+  \placeholder{0 0 1 1}
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+}
+
+\begin{document}
+
+  \page{
+    \setgrid[gutter=5mm]{{{1}{1}} {{1}{1}{1}{1}}}
+
+    \place{0 0 1.7 1.4}
+    \graphic{1x1}
+
+    \text{2}
+
+    \text{
+      3\par
+      \ifrightpage{
+        right\par
+        page
+      }
+    }
+
+    \place{0 1 1 2}
+    \text{4}
+    \text{OVERFLOW}
+
+    \setgrid[gutter=5mm]{{{1}{1}}{{1}}}
+    \text[bottom]{1}
+    \text[bottom]{2}
+    \text[bottom]{3}
+    \text{OVERFLOW}
+  }
+
+  \template{my tpl}{
+    \graphic{1x1}
+
+    \text{2}
+
+    \text{
+      3\par
+      \ifleftpage{
+        left\par
+        page
+      }
+    }
+
+    \text{4}
+  }
+
+  \page{
+    \setgrid{{{1}{2}}{{1}{2}}}
+    \text{1}
+    \text{2}
+    \text{3}
+    \place{0 0 1 1}
+    \text[center]{4}
+    \text{5}
+    \text{6}
+  }
+
+  \template{my tpl 2}{
+    \text{7}
+    \text{8}
+    \text{9}
+    \text[center]{10}
+    \text{11}
+    \text{12}
+  }
+
+\end{document}

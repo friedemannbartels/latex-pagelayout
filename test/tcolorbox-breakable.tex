@@ -1,0 +1,48 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[bleed=3mm]{xput}
+\usepackage{lipsum}
+
+\margin=5mm
+\pagewidth=10cm
+\pageheight=10cm
+\gutter=5mm
+
+\tcbset{
+  boxrule=1mm,
+  boxsep=1mm,left=1mm,right=1mm,top=1mm,bottom=1mm,
+  colback=yellow,
+  colframe=red!75!black,
+  opacityframe=1,
+  opacityback=1,
+  arc=1mm,
+  coltext=blue,
+}
+
+\newborder{secondary}{color=green,opacity=0.5,width=1mm,radius=2mm}
+\newshadow{primary}{size=2,opacity=1}
+\newshadow{secondary}{size=6,opacity=1,xshift=0.5mm,yshift=0.5mm}
+
+\begin{document}
+
+  \page{
+    \setgrid{{{}{}}{{}{}}}
+    \text[breakable,shadow=primary]{\lipsum[1][1-6]}
+    \text[breakable,shadow=secondary,name=two,border=secondary]{\lipsum[1][7-12]}
+    \usetext
+    \usetext[two]
+  }
+
+\end{document}

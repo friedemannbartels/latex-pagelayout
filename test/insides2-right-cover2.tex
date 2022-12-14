@@ -1,0 +1,31 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[fanfold]{xput}
+\input{_config}
+
+\beginright
+\newgraphic{2x1}{scale=1.4}
+\newgraphic{2x3@1.2}{scale=1.2,file=2x3}
+
+\begin{document}
+
+  \template[back cover,page graphic=2x1]{f}{}
+  \template[front cover,page graphic=2x3@1.2]{f}{}
+
+  \template{f}{\header}
+  \template[double,page graphic=2x3]{ff}{\header\header}
+  \template{f}{\header}
+
+\end{document}

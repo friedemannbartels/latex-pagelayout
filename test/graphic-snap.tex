@@ -1,0 +1,88 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[safezone,graphpaper,twoside,fanfold]{xput}
+\pagewidth=100mm
+\pageheight=100mm
+\margin=0mm
+\bleed=6mm
+\innerbleed=18mm
+\bottombleed=12mm
+\topbleed=2mm
+\setgraphpaper{0.5\pagewidth,0.5\pagewidth}
+
+\begin{document}
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=2]{1x1}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1.015]{1x1}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[hpos=0,scale=2]{3x2}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[vpos=0,scale=2]{3x2}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1.03]{2x3}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1.08]{3x2}
+  }
+
+  \bleed=0mm
+  \innerbleed=0mm
+  \outerbleed=20mm
+  \bottombleed=10mm
+  \topbleed=0mm
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1,hpos=0.5]{2x1}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1,hpos=0.5]{2x1}
+  }
+
+  \bleed=0mm
+  \innerbleed=0mm
+  \outerbleed=0mm
+  \bottombleed=10mm
+  \topbleed=0mm
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1,hpos=0.5]{2x1}
+  }
+
+  \page{
+    \place{0 0 1 1}
+    \graphic[scale=1,hpos=0.5]{1x2}
+  }
+
+\end{document}

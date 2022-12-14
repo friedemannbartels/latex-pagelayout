@@ -1,0 +1,52 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[draft]{xput}
+\usepackage{lipsum}
+
+\pagewidth=15cm
+\pageheight=15cm
+\gutter=10mm
+
+\newborder{my border}{width=2mm, color=magenta, radius=5mm}
+\newshadow{my shadow}{size=5, color=magenta, opacity=1}
+
+\begin{document}
+
+  \template{ff-ff}{
+    \graphic[
+      border=my border,
+      border radius=10mm
+    ]{1x1}
+
+    \graphic[
+      border=my border,
+      shadow=my shadow
+    ]{1x1}
+
+    \text[
+      shadow=my shadow,
+      shadow color=black,
+      shadow opacity=0.2
+    ]{\lipsum[1][1-5]}
+
+    \graphic[
+      shadow size=5,
+      shadow opacity=0.6,
+      shadow xshift=1mm,
+      shadow yshift=1mm
+    ]{1x1}
+  }
+
+\end{document}

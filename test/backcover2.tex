@@ -1,0 +1,77 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[twoside,fanfold]{xput}
+
+\graphicspath{{images}}
+
+\pageheight=10cm
+\pagewidth=10cm
+\margin=20mm
+\outermargin=10mm
+\topmargin=5mm
+
+\newborder{back}{radius=5mm,color=cyan,width=2mm}
+\newborder{front}{radius=10mm,color=cyan,width=2mm}
+\newborder{page}{radius=10mm,color=yellow,width=4mm}
+\newshadow{back}{color=blue,size=20}
+\newshadow{front}{color=blue,size=20,opacity=1}
+\newshadow{page}{color=red,size=10}
+
+\setgrid{
+  {{1}{1}}
+  {{1}{1}}
+}
+
+\grid\safezone
+
+\begin{document}
+
+  \setpagegraphic[scale=1.2]{2x3}
+  \setpagecolor{cyan!30!white}
+  \setcolor{blue}
+  \setborder{back}
+  \setshadow{back}
+  \page[back cover]{
+    \text[shadow=,border=]{back}
+    \graphic{3x2}
+  }
+
+  \setgrid{{{1}{1}} {{1}}}
+  \setpagegraphic[scale=1.2]{3x2}
+  \setpagecolor{white}
+  \setcolor{black}
+  \setborder{front}
+  \setshadow{front}
+  \page[front cover]{
+    \text[shadow=,border=]{front}
+    \graphic{2x3}
+  }
+
+  \outermargin=30mm
+  \gutter=4mm
+  \bottommargin=10mm
+  \topmargin=20mm
+  \setgrid{{{1}{1}}}
+  \setpagegraphic{2x1}
+  \setpagecolor{red!10}
+  \setcolor{red}
+  \setborder{page}
+  \setshadow{page}
+  \page{
+    \text[shadow=,border=]{\strut page}
+    \graphic{1x2}
+  }
+
+\end{document}

@@ -1,0 +1,47 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\pagewidth=100mm
+\pageheight=100mm
+\margin=10mm
+\gutter=10mm
+\bleed=3mm
+\innerbleed=9mm
+\bottombleed=6mm
+\topbleed=1mm
+\topsafetymargin=1mm
+\bottomsafetymargin=3mm
+\innersafetymargin=5mm
+\outersafetymargin=2mm
+
+\coverwidth=110mm
+\coverheight=110mm
+\coverinnerbleed=3mm
+\coverouterbleed=9mm
+\coverbottombleed=1mm
+\covertopbleed=6mm
+\covertopsafetymargin=3mm
+\coverbottomsafetymargin=1mm
+\coverinnersafetymargin=2mm
+\coveroutersafetymargin=5mm
+
+\placeholders\safezone
+\grid
+\fillpages
+
+
+\newcommand\header{
+  \Huge
+  \text{\ifrightpage{\hspace*{\fill}}\thepage\ifleftpage{ L}\ifrightpage{ R}}
+}

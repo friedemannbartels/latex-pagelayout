@@ -1,0 +1,57 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\makeatletter
+\newcommand{\dimentonumber}[1]{\strip@pt\dimexpr #1*65536/\number\dimexpr 1\unitlength}
+\makeatother
+
+\definecolor{cyan}{rgb}{0, 1, 1}
+\definecolor{magenta}{rgb}{1, 0, 1}
+\definecolor{yellow}{rgb}{1, 1, 0}
+
+\newdimen\strokewidth
+\newdimen\width
+\newdimen\height
+
+\width=1500pt
+\height=1000pt
+\strokewidth=1pt
+\def\strokecolor{black}
+\def\strokeopacity{0.3}
+\def\bgcolor{cyan}
+\def\bgopacity{0.3}
+
+\begin{document}
+  \begin{picture}(\dimentonumber{\width},\dimentonumber{\height})%
+    \put(0,0){%
+      \begin{tikzpicture}%
+        \pgflowlevelsynccm
+        \fill[\bgcolor,opacity=\bgopacity] (0,0) rectangle ++(\width,\height);%
+        \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](0pt,0pt) -- (\width,\height);%
+        \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](0pt,\height) -- (\width,0pt);%
+        \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](0pt,\height / 2) -- (\width,\height / 2);%
+        \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](\width / 2,0pt) -- (\width / 2,\height);%
+        \ifdim\width>\height
+          \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](\width / 2,\height / 2) circle (\height / 2 - \strokewidth / 2);%
+        \else
+          \draw[line width=\strokewidth,draw=\strokecolor,opacity=\strokeopacity](\width / 2,\height / 2) circle (\width / 2 - \strokewidth / 2);%
+        \fi
+      \end{tikzpicture}
+    }%
+  \end{picture}
+\end{document}

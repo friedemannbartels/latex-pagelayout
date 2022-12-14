@@ -1,0 +1,55 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[grid,graphpaper,pagewidth=10cm,pageheight=10cm,margin=1cm,pagecolor=black,color=green]{xput}
+
+\begin{document}
+
+  \page{
+    \setgrid[gutter=10mm]{
+      {[3]{3}{3!}}
+      {[2]{2}{2!}}
+      {[1]{1}{1}}
+    }
+    \place{0 0 1 1}
+    \text[center]{
+      \centering\Huge\textbf{GRID}
+    }
+  }
+
+  \page{
+    \setgrid[gutter=10mm]{
+      {[3]{3!}{3!}}
+      {[2]{2!}{2!}{2!}}
+      {[1]{1}{1}}
+    }
+  }
+
+  \page{
+    \setgrid[gutter=10mm,bottom margin=20mm]{
+      {[3]{3!}{3!}}
+      {[2]{2!}{2!}{2!}}
+      {[1]{1}{1}}
+    }
+  }
+
+  \page{
+    \setgrid[gutter=10mm]{
+      {[1]{1!}{1!}{1!}{1!}}
+      {[1!]{3}{3!}}
+      {[1!]{9!}}
+    }
+  }
+
+\end{document}

@@ -1,0 +1,178 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[twoside,bottommargin=10mm,pagecolor=black,color=white]{xput}
+\usepackage{hyperref}
+\input{_config}
+
+\pagenumbering{roman}
+
+\newbeforepage{primary}{
+  \setgrid[height=\bottommargin,y=0mm]{
+    {{1}}
+  }
+  \place{0 0 1 1}
+  \graphic{1x1}
+  \leftpage{
+    \place{0 0 1 1}
+    \text[center]{\thepage}
+  }
+  \rightpage{
+    \place{0 0 1 1}
+    \text[center]{\hspace*{\fill}\thepage}
+  }
+}
+\newbeforepage{secondary}{
+  \setgrid[height=\margin,y=\pageheight-\margin]{
+    {{1}}
+  }
+  \place{0 0 1 1}
+  \text[center]{\ifrightpage{\hspace*{\fill}}\thepage}
+}
+
+\setbeforepage{primary}
+
+\newtemplate{f}{
+  \ifleftpage{
+    \setgrid[hpos=1,inner margin=0.5\margin,y=0mm,height=\bottommargin]{
+      {[1]{1!}}
+    }
+  }
+  \ifrightpage{
+    \setgrid[hpos=0,inner margin=0.5\margin,y=0mm,height=\bottommargin]{
+      {[1]{1!}}
+    }
+  }
+  \place{0 0 1 1}
+  \graphic[scale=2]{1x2}
+  \ifleftpage{
+    \setgrid[x=0mm,width=2mm]{
+      {{1}}
+    }
+  }
+  \ifrightpage{
+    \setgrid[x=0mm,width=5mm]{
+      {{1}}
+    }
+  }
+  \place{0 0 1 1}
+  \graphic[scale=1]{3x2}
+  \setgrid{
+    {{1}}
+  }
+  \placeholder{0 0 1 1}
+  \placeholder{0 0 1 1}
+}
+\newtemplate{ff}{
+  \leftpage{
+    \placeholder{0 0 1 1}
+  }
+  \setgrid[gutter=20mm]{
+    {{1}{1}}
+  }
+  \placeholder{0 0 1 1}
+  \placeholder[4]{0 1 1 2}
+  \begingroup
+    \setgrid[outer margin=0mm,height=1mm,y=\bottommargin-1mm]{
+      {{1}}
+    }
+    \place{0 0 1 1}
+    \graphic{1x1}
+  \endgroup
+  \rightpage{
+    \setgrid{
+      {{1}}
+    }
+    \placeholder[3]{0 0 1 1}
+  }
+}
+
+\begin{document}
+
+  \template{f}{
+    \text[parbox]{
+      \tableofcontents
+    }
+  }
+  \template[before page=secondary]{f}{
+    \text[parbox]{
+      \section{One}
+      \subsection{A}
+      \subsection{B}
+      \subsection{C}
+    }
+  }
+  \pagenumbering{arabic}
+  \template{f}{
+    \text[parbox]{
+      \section{Two}
+    }
+  }
+  \template[double,page color=yellow!10!black]{ff}{
+    \graphic[hpos=0]{2x1}
+    \text[parbox]{
+      \section{Three}
+      \thepage
+    }
+    \text[parbox]{
+      \section{Four}
+      \thepage
+    }
+    \graphic[hpos=1]{2x1}
+  }
+  \page[double,page color=yellow!10!black]{
+    \leftpage{
+      \place{0 0 1 1}
+      \graphic[hpos=0]{2x1}
+    }
+    \setgrid[gutter=20mm]{
+      {{1}{1}}
+    }
+    \place{0 0 1 1}
+    \text{
+      hello
+      \thepage
+    }
+    \place{0 1 1 2}
+    \text{
+      world
+      \thepage
+    }
+    \setgrid{
+      {{1}}
+    }
+    \rightpage{
+      \place{0 0 1 1}
+      \graphic[hpos=1]{2x1}
+    }
+  }
+  \page[page color=pink!30!black]{
+    \place{0 0 1 1}
+    \text[parbox]{
+      \section{Five}
+    }
+    \leftpage{
+      \place{0 0 1 1}
+      \graphic{2x1}
+    }
+  }
+
+  \appendix
+  \template{f}{
+    \text[parbox]{
+      \section{Appendix}
+    }
+  }
+
+\end{document}

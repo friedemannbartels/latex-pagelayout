@@ -1,0 +1,70 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[safezone]{xput}
+
+\pagewidth=200mm
+\pageheight=200mm
+\gutter=20mm
+\margin=20mm
+
+\newborder{primary}{
+  width=4mm,
+  color=white,
+  opacity=0.6
+}
+\newshadow{primary}{
+  size=4,
+  opacity=0.6
+}
+
+
+\begin{document}
+  \template[
+    margin=50mm
+  ]{f}{
+    \graphic[
+      shadow size=60,
+      shadow opacity=0.6,
+      border radius=0.5\width,
+      border width=8mm,
+      border color=white
+    ]{2x3}
+  }
+
+  \template[page color=pink]{ff-ff}{
+    \graphic[shadow size=20,shadow color=cyan,shadow opacity=0.9]{3x2}
+    \graphic[shadow size=20,border width=4mm,border color=red,shadow color=red,border opacity=0.3,border radius=8mm,shadow opacity=0.7]{1x1}
+    \graphic[shadow size=20,shadow color=yellow,border width=2mm,shadow opacity=0.8]{2x1}
+    \graphic[shadow size=40,shadow color=white,shadow opacity=1,border radius=0.5\width]{1x1}
+  }
+
+  \page[gutter=4mm]{
+    \setgrid{
+      {{1}{1}{1}{1}{1}}
+      {{1}{1}{1}{1}{1}}
+      {{1}{1}{1}{1}{1}}
+      {{1}{1}{1}{1}{1}}
+      {{1}{1}{1}{1}{1}}
+    }
+    \place{0 0 1 1}
+    \graphic[shadow=primary]{2x1}
+    \graphic[shadow=primary,shadow xshift=1mm,shadow yshift=-1mm]{2x1}
+    \graphic[shadow=primary]{2x1}
+    \graphic[shadow size=0,shadow xshift=1mm,shadow yshift=1mm,shadow color=magenta,shadow opacity=0.2]{2x1}
+    \place{1 1 5 5}
+    \graphic[shadow=primary]{2x1}
+  }
+
+\end{document}

@@ -1,0 +1,91 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[import,optimize,density=108,placeholder,grid,safezone]{xput}
+
+\gutter=2mm
+\margin=0mm
+\bleed=6mm
+
+
+\newtemplate{test}{
+  \setgrid{
+    {[16]{1}{2}{4}{8}{16}}
+    {[8]{1}{2}{4}{8}{16}}
+    {[2]{1}{2}{8}{4}{16}}
+    {[4]{1}{2}{4}{8}{16}}
+    {[1]{1}{2}{4}{8}{16}}
+  }
+  \placeholder{0 0 1 1}
+  \placeholder{0 1 1 2}
+  \placeholder{0 2 1 3}
+  \placeholder{0 3 1 4}
+  \placeholder{0 4 1 5}
+
+  \placeholder{1 0 2 1}
+  \placeholder{1 1 2 2}
+  \placeholder{1 2 2 3}
+  \placeholder{1 3 1.4 4}
+  \placeholder{1.4 3 2 4}
+  \placeholder{1 4 2 5}
+
+  \placeholder{2 0 3 1}
+  \placeholder{2 1 3 2}
+  \placeholder{2 2 3 3}
+  \placeholder{2 3 3 4}
+  \placeholder{2 4 3 5}
+
+  \placeholder{3 0 4 1}
+  \placeholder{3 1 4 2}
+  \placeholder{3 2 4 3}
+  \placeholder{3 3 5 4}
+  \placeholder{3 4 4 5}
+
+  \placeholder{4 0 5 1}
+  \placeholder{4 1 5 2}
+  \placeholder{4 2 5 3}
+  \placeholder{4 4 5 5}
+}
+
+\begin{document}
+  \pagewidth=200mm
+  \pageheight=200mm
+  \template{test}{
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+    \graphic{_PAX706;7&! -- ?= (1).<,.JPEG}
+  }
+\end{document}

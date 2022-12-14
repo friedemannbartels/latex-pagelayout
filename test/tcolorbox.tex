@@ -1,0 +1,86 @@
+%%
+%% Copyright (C) 2022 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[bleed=3mm,grid,graphpaper]{xput}
+
+\margin=5mm
+\pagewidth=5cm
+\pageheight=244mm
+\gutter=6mm
+
+\graphicspath{{images}}
+
+\tcbset{
+  boxrule=1mm,
+  boxsep=1mm,left=4mm,right=4mm,top=2mm,bottom=2mm,
+  colback=yellow,
+  colframe=red!75!black,
+  opacityframe=1,
+  opacityback=1,
+  arc=1mm
+}
+
+\newborder{primary}{color=green,opacity=0.5,width=1mm}
+\newshadow{primary}{size=2,opacity=1}
+
+\begin{document}
+
+  \page{
+    \setgrid{
+      {[2]{1}}{[2]{1}}{[2]{1}}
+      {{1}}{{1}}{{1}}
+      {[2]{1}}{[2]{1}}{[2]{1}}
+      {[3]{1}}{[3]{1}}{[3]{1}}
+    }
+    \text[bottom]{
+      Hello
+    }
+    \text[center,colframe=cyan,opacityback=0,color=magenta,toprule=2mm,leftrule=4mm,rightrule=5mm]{
+      Telefon
+    }
+    \text[border=primary,leftrule=2mm,bottomrule=3mm,shadow size=3]{
+      Hello
+    }
+    \text[top,shadow=primary]{
+      Hello
+    }
+    \text[center,shadow=primary]{
+      Hello
+    }
+    \text[bottom,shadow=primary]{
+      Hello
+    }
+    \text[bottom,height=\height,shadow=primary]{
+      Hello
+    }
+    \text[center,height=\height,toprule=2mm,leftrule=4mm,bottomrule=3mm,rightrule=5mm,shadow=primary]{
+      Hello
+    }
+    \text[top,height=\height,boxrule=2mm,arc=2mm,colframe=cyan,shadow=primary]{
+      Hello
+    }
+    \place{8 0 9 1}
+    \graphic[border width=2mm,border radius=2mm,border opacity=0.5,border color=magenta]{1x1}
+    \text[bottom,height=1.5cm,shadow=primary]{
+      Hello
+    }
+    \text[center,height=1.5cm,valign=top,bottomrule=2mm,leftrule=3mm,shadow=primary]{
+      Hello
+    }
+    \text[height=1.5cm,valign=center,shadow=primary]{
+      Hello
+    }
+  }
+
+\end{document}
