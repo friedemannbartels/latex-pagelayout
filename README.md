@@ -1,9 +1,11 @@
-# Xput - Declarative Desktop Publishing
+# Xput
 
-The Xput LaTeX class features a declarative desktop publishing approach.
+__Declarative Desktop Publishing with LaTeX__
+
+The Xput LaTeX class provides a collection of macros that wrap the macro put to offer a more desktop-publishing-like experience for creating graphic rich documents like photo books.
 With Xput you can create single- and double-sided documents, create pages with margins, safety margins and bleed, use templates, align text and graphics in a grid, wrap text across multiple pages and use before pages. 
 Generic templates, automatic grid layout and a simple and consistent user interface make it easier than ever to create graphic rich documents with LaTeX.
-Under the hood, Xput uses the TikZ and tcolorbox packages, ImageMagick and Inkscape.
+Under the hood Xput uses the TikZ and tcolorbox packages, ImageMagick and Inkscape.
 
 Xput is distributed under the [LaTeX Project Public License](https://www.latex-project.org/lppl/lppl-1-3c/) version 1.3c or later.
 
@@ -11,11 +13,11 @@ To submit bug reports and feature requests go to the official repository on [Git
 
 ## Installation
 
-In general, you should use the package manager shipped with your TeX distribution to install Xput. Alternatively, you can copy the contents of `xput.tds.zip` from [CTAN](https://www.ctan.org/pkg/xput) to your local TeX directory tree.
+In general, you should use the package manager shipped with your TeX distribution to install Xput. Alternatively you can copy the contents of [xput-1.0.1.tds.zip](https://github.com/friedemannbartels/xput/releases/download/1.0.1/xput-1.0.1.tds.zip) to your local TeX directory tree.
 
 ### Command Line Tools
 
-For image optimization, shadow creation and preflight, perform these installation steps:
+For image optimization, shadow creation and preflight perform these installation steps:
 
 - Add the directory `tex/latex/xput/scripts` in your local TeX file tree to your `$PATH`.
 - Add `xputserver` to the list of `shell_escape_commands` in your `texmf.cnf`.
@@ -40,3 +42,5 @@ Run visual regression tests with the following command:
 
     cd test
     xput test
+    
+The tests are not included in the [CTAN](https://www.ctan.org/pkg/xput) package. You find the tests on [GitHub](https://github.com/friedemannbartels/xput/tree/main/test).
