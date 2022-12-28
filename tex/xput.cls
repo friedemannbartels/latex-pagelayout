@@ -3596,9 +3596,8 @@
 \def\xput@err@noimportdir{errornoimportdir}
 \def\xput@err@magicknotinstalled{errormagicknotinstalled}
 \def\xput@err@inkscapenotinstalled{errorinkscapenotinstalled}
-\def\preventunrestrictedshellexecution{";-)" \%}
 \newcommand\xput@getppi[1]{
-  \immediate\openin\xput@scriptresult={|xputserver \preventunrestrictedshellexecution getwidth\% "#1"}
+  \immediate\openin\xput@scriptresult={|xputserver getwidth\% "#1"}
   \ifeof\xput@scriptresult
     \xput@errmsg@shellaccessforbidden{Ppi not calculated}
   \else
@@ -3621,7 +3620,7 @@
   \immediate\closein\xput@scriptresult
 }
 \newcommand\xput@optimizegraphic[2]{
-  \immediate\openin\xput@scriptresult={|xputserver \preventunrestrictedshellexecution optimize\% "#1#2" \% "\xput@filename" \%\xput@optimizedext\%\the\numexpr\xput@originalgraphicwidth\%\the\numexpr\xput@originalgraphicheight\%\the\numexpr\xput@cropleft\%\the\numexpr\xput@cropright\%\the\numexpr\xput@croptop\%\the\numexpr\xput@cropbottom\%\the\numexpr\xput@density\%\the\numexpr\width\%\the\numexpr\height\%\xput@downsamplethreshold\%\xput@graphicoptionunsharp\%\xput@quality}
+  \immediate\openin\xput@scriptresult={|xputserver optimize\% "#1#2" \% "\xput@filename" \%\xput@optimizedext\%\the\numexpr\xput@originalgraphicwidth\%\the\numexpr\xput@originalgraphicheight\%\the\numexpr\xput@cropleft\%\the\numexpr\xput@cropright\%\the\numexpr\xput@croptop\%\the\numexpr\xput@cropbottom\%\the\numexpr\xput@density\%\the\numexpr\width\%\the\numexpr\height\%\xput@downsamplethreshold\%\xput@graphicoptionunsharp\%\xput@quality}
   \ifeof\xput@scriptresult
     \xput@errmsg@shellaccessforbidden{File not optimized}
   \else
@@ -3639,7 +3638,7 @@
   \immediate\closein\xput@scriptresult
 }
 \newcommand\xput@makeshadow[1]{
-  \immediate\openin\xput@scriptresult={|xputserver \preventunrestrictedshellexecution makeshadow\%#1\%\xput@defaultshadowsize\%\xput@defaultshadowopacity\%\xput@defaultshadowcolor\%\the\xput@frameshadowwidth\%\the\xput@frameshadowheight\%\the\xput@frameshadowframewidth\%\the\xput@frameshadowframeheight\%\the\xput@frameshadowborder\%\the\xput@frameshadowradius}
+  \immediate\openin\xput@scriptresult={|xputserver makeshadow\%#1\%\xput@defaultshadowsize\%\xput@defaultshadowopacity\%\xput@defaultshadowcolor\%\the\xput@frameshadowwidth\%\the\xput@frameshadowheight\%\the\xput@frameshadowframewidth\%\the\xput@frameshadowframeheight\%\the\xput@frameshadowborder\%\the\xput@frameshadowradius}
   \ifeof\xput@scriptresult
     \edef\xput@processresult{\xput@err@shellaccessforbidden}
     \xput@errmsg@shellaccessforbidden{Shadow not created}
@@ -3659,7 +3658,7 @@
   \immediate\closein\xput@scriptresult
 }
 \def\xput@start{
-  \immediate\openin\xput@scriptresult={|xputserver \preventunrestrictedshellexecution start\ifxput@import\%import\% "\ifdefined\Ginput@path\Ginput@path\fi" \fi\ifxput@isturbomode\%turbo\% "\jobname" \fi}
+  \immediate\openin\xput@scriptresult={|xputserver start\ifxput@import\%import\% "\ifdefined\Ginput@path\Ginput@path\fi" \fi\ifxput@isturbomode\%turbo\% "\jobname" \fi}
   \ifeof\xput@scriptresult
     \ifxput@import
       \xput@errmsg@shellaccessforbidden{Import not working}
@@ -3689,7 +3688,7 @@
   \global\edef\xput@batchlist{\xput@batchlist\% "#1#2" \% "\xput@filename" \%\xput@optimizedext\%\the\numexpr\xput@originalgraphicwidth\%\the\numexpr\xput@originalgraphicheight\%\the\numexpr\xput@cropleft\%\the\numexpr\xput@cropright\%\the\numexpr\xput@croptop\%\the\numexpr\xput@cropbottom\%\the\numexpr\xput@density\%\the\numexpr\width\%\the\numexpr\height\%\xput@downsamplethreshold\%\xput@graphicoptionunsharp\%\xput@quality}
 }
 \newcommand\xput@batchoptimize{
-  \immediate\openin\xput@scriptresult={|xputserver \preventunrestrictedshellexecution batchoptimize\xput@batchlist}
+  \immediate\openin\xput@scriptresult={|xputserver batchoptimize\xput@batchlist}
   \ifeof\xput@scriptresult
   \else
     \endlinechar=-1

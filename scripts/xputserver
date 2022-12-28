@@ -289,7 +289,6 @@ input=$( echo "$@" | sed -e 's/\\//g' | sed -e 's/ %/%/g' | sed -e 's/% /%/g' )
 IFS="%"
 set -- $input
 IFS=" "
-shift
 
 case "$1" in
 getwidth)
