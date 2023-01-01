@@ -229,7 +229,7 @@ import() {
 }
 
 startturbo() {
-  file=$1
+  file="$(echo $1 | sed -e 's/\.pdflatex$//g')"
   if [ -f $file.tex ]; then
     tmpdir=$( mktemp -d 2>/dev/null )/xputturbo$( date "+%Y%m%d%H%M%S" )$RANDOM
     mkdir $tmpdir
@@ -237,7 +237,7 @@ startturbo() {
     cp $file.tex $tmpdir/xputturbobatchoptimizexyz.tex
 
     command=$(echo $(ps -p $PPID -o command ))
-    engine=$(echo $command | sed -e 's/[A-Z]//g'| sed -e 's/ .*//g' | tr -d '\n')
+    engine=$(echo $command | sed -e 's/^[A-Z ]*//g' | sed -e 's/ .*//g' | tr -d '\n')
 
     case "$command" in
       *-shell-escape*) 
