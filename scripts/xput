@@ -13,6 +13,8 @@
 # LaTeX version 2008/05/04 or later.
 #
 
+version=1.0.1
+
 OK="$( tput setaf 2 )•$( tput sgr0 )"
 FAILED="$( tput setaf 1 )$( tput bold )x$( tput sgr0 )"
 NEW="$( tput setaf 3 )$( tput bold )+$( tput sgr0 )"
@@ -503,6 +505,9 @@ perf)
   shift "$(( OPTIND - 1 ))"
 
   perf $clear $shell $engine $1
+  ;;
+--version)
+  echo Xput $version
   ;;
 *)
   usage

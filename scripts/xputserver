@@ -13,6 +13,8 @@
 # LaTeX version 2008/05/04 or later.
 #
 
+version=1.0.1
+
 _convert() {
   turbo=$1
   filename=$2
@@ -293,6 +295,11 @@ batchoptimize() {
     cores=$(( cores - 1 ))
   done
 }
+
+if [ "$1" = --version ]; then
+  echo Xput Server $version
+  exit
+fi
 
 input=$( echo "$@" | sed -e 's/\\//g' | sed -e 's/ %/%/g' | sed -e 's/% /%/g' )
 IFS="%"
