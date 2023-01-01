@@ -382,27 +382,33 @@ perf() {
 
 usage() {
   cat <<HELP_USAGE
-usage: $(basename $0) test [-cs] [-e engine] [-d density] pattern
-   or: $(basename $0) approve [-e engine] pattern
-   or: $(basename $0) compare [-d density] files
-   or: $(basename $0) perf [-cs] [-e engine] file
+usage: xput test [-cs] [-e ENGINE] [-d DENSITY] [PATTERN]
+       xput approve [-e ENGINE] [PATTERN]
+       xput compare [-d DENSITY] FILE FILE
+       xput perf [-cs] [-e ENGINE] FILE
+       xput --help
+       xput --version
 
    -c          clear cache
    -s          enable shell escape
-   -d density  set density in ppi (default 72)
-   -e engine   set latex engine (default xelatex)
+   -d DENSITY  density in ppi (default 72)
+   -e ENGINE   latex engine (default xelatex)
 
-   Running \`$(basename $0) test\` creates pdf files for all tex files matching the
+   Running \`xput test\` creates pdf files for all tex files matching the
    pattern and performs a visual regression test. If no pattern is specified,
    all files in the current directory are tested except for files whose names
    begin with an underscore.
 
-   Running \`$(basename $0) approve\` replaces the reference files with the test files.
+   Running \`xput approve\` replaces the reference files with the test files.
 
-   Running \`$(basename $0) compare\` creates a visual diff for two pdf files.
+   Running \`xput compare\` creates a visual diff for two pdf files.
 
-   Running \`$(basename $0) perf\` measures the time for creating a pdf file from the
+   Running \`xput perf\` measures the time for creating a pdf file from the
    given tex file.
+
+   Running \`xput --help\` returns this man page.
+
+   Running \`xput --version\` returns the Xput version.
 HELP_USAGE
 }
 
