@@ -13,8 +13,8 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{xput}[2022/12/19 declarative desktop publishing]
-\def\Xputversion{1.0.1}
+\ProvidesClass{xput}[2023/01/02 declarative desktop publishing]
+\def\Xputversion{1.0.2}
 
 % packages
 \RequirePackage{pgfopts}

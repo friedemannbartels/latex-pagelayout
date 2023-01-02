@@ -82,7 +82,7 @@ For a complete reference have a look at the [manual](https://github.com/friedema
 
 ## Installation
 
-In general, you should use the package manager shipped with your TeX distribution to install Xput. Alternatively you can copy the contents of [xput-1.0.1.tds.zip](https://github.com/friedemannbartels/xput/releases/download/1.0.1/xput-1.0.1.tds.zip) to your local TeX directory tree.
+In general, you should use the package manager shipped with your TeX distribution to install Xput. Alternatively you can copy the contents of [xput.tds.zip](https://github.com/friedemannbartels/xput/releases/download/v1.0.2/xput.tds.zip) to your local TeX directory tree.
 
 ### Command Line Tools
 
