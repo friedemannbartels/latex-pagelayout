@@ -1530,6 +1530,14 @@
   \xput@y=\posy{-1}{#3}
   \width=\dimexpr(\xput@xx - \xput@x)\relax
   \height=\dimexpr(\xput@yy - \xput@y)\relax
+  \xput@x=\dimexpr(\xput@x + \width)\relax
+  \xput@y=\dimexpr(\xput@y + \height)\relax
+  \ifdim\xput@x>\dimexpr\xput@pagewidth+\xput@innerbleed+\xput@outerbleed\relax
+    \xput@x=\dimexpr\xput@pagewidth+\xput@innerbleed+\xput@outerbleed\relax
+  \fi
+  \ifdim\xput@y>\dimexpr\xput@pageheight+\xput@topbleed+\xput@bottombleed\relax
+    \xput@y=\dimexpr\xput@pageheight+\xput@topbleed+\xput@bottombleed\relax
+  \fi
   \def\xput@ppicolor{green!50!black}
   \def\xput@ppicolortext{white}
   \ifnum#6<300
@@ -1546,7 +1554,7 @@
   \put(\xput@dimentonumber{\xput@x},\xput@dimentonumber{\xput@y}){%
     \begin{tikzpicture}%
       \pgflowlevelsynccm%
-      \node[fill=\xput@ppicolor,fill opacity=0.9,line width=0pt,anchor=north east] at (\width,\height){
+      \node[fill=\xput@ppicolor,fill opacity=0.9,line width=0pt,anchor=north east] at (0,0){
         \color{\xput@ppicolortext}\textbf{#6ppi}
       };
     \end{tikzpicture}%
