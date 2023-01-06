@@ -260,7 +260,7 @@ test() {
 
 approve() {
   filecount=0
-  
+
   suffix=""
   if [ "$1" != "xelatex" ]; then
     suffix=".$1"
@@ -382,69 +382,25 @@ perf() {
 
 usage() {
   cat <<HELP_USAGE
-usage: xput test [-cs] [-e ENGINE] [-d DENSITY] [PATTERN]
-       xput approve [-e ENGINE] [PATTERN]
-       xput compare [-d DENSITY] FILE FILE
-       xput perf [-cs] [-e ENGINE] FILE
-       xput --help
-       xput --version
+usage: textest [-cs] [-e ENGINE] [-d DENSITY] [PATTERN]
+       textest approve [-e ENGINE] [PATTERN]
+       textest compare [-d DENSITY] FILE FILE
+       textest perf [-cs] [-e ENGINE] FILE
 
-   -c          clear cache
-   -s          enable shell escape
-   -d DENSITY  density in ppi (default 72)
-   -e ENGINE   latex engine (default xelatex)
-
-   Running \`xput test\` creates pdf files for all tex files matching the
-   pattern and performs a visual regression test. If no pattern is specified,
-   all files in the current directory are tested except for files whose names
-   begin with an underscore.
-
-   Running \`xput approve\` replaces the reference files with the test files.
-
-   Running \`xput compare\` creates a visual diff for two pdf files.
-
-   Running \`xput perf\` measures the time for creating a pdf file from the
-   given tex file.
-
-   Running \`xput --help\` returns this man page.
-
-   Running \`xput --version\` returns the Xput version.
+   -c          Clears cache.
+   -s          Enables shell escape.
+   -d DENSITY  Sets density in ppi (default 72).
+   -e ENGINE   Sets latex engine (default xelatex).
+   --help      Prints a help message.
+   --version   Prints version information.
 HELP_USAGE
 }
 
+version() {
+  echo textest $version
+}
+
 case "$1" in
-test)
-  shift
-
-  density=72
-  shell=false
-  clear=false
-  engine=xelatex
-
-  while getopts ":e:d:sc" arg; do
-    case "${arg}" in
-      c)
-        clear=true
-        ;;
-      d)
-        density="${OPTARG}"
-        ;;
-      e)
-        engine="${OPTARG}"
-        ;;
-      s)
-        shell=true
-        ;;
-      ?)
-        echo "Invalid option: -${OPTARG}."
-        ;;
-    esac
-  done
-
-  shift "$(( OPTIND - 1 ))"
-
-  test $shell $density $clear $engine $1
-  ;;
 approve)
   shift
   engine=xelatex
@@ -513,8 +469,38 @@ perf)
   perf $clear $shell $engine $1
   ;;
 --version)
-  echo Xput $version
+  version
+  ;;
+--help)
+  usage
   ;;
 *)
-  usage
+  density=72
+  shell=false
+  clear=false
+  engine=xelatex
+
+  while getopts ":e:d:sc" arg; do
+    case "${arg}" in
+      c)
+        clear=true
+        ;;
+      d)
+        density="${OPTARG}"
+        ;;
+      e)
+        engine="${OPTARG}"
+        ;;
+      s)
+        shell=true
+        ;;
+      ?)
+        echo "Invalid option: -${OPTARG}."
+        ;;
+    esac
+  done
+
+  shift "$(( OPTIND - 1 ))"
+
+  test $shell $density $clear $engine $1
 esac

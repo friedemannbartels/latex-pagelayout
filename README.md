@@ -96,4 +96,4 @@ For image optimization, shadow creation and preflight perform these installation
 
 ## Development
 
-Run visual regression tests inside the _tests_ directory with the command `xput test`
+Run visual regression tests inside the _tests_ directory with the command `textestvis`.

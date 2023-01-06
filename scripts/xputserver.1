@@ -1,0 +1,125 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "XPUTSERVER" "1" "January 2023" "" ""
+.
+.SH "NAME"
+\fBxputserver\fR \- an interface for the Xput LaTeX class
+.
+.SH "SYNOPSIS"
+\fBxputserver getwidth\fR % FILE
+.
+.P
+\fBxputserver optimize\fR % FILE % FILENAME % EXTENSION % ORIGINALWIDTH % ORIGINALHEIGHT % CROPLEFT % CROPRIGHT % CROPTOP % CROPBOTTOM % DENSITY % WIDTH % HEIGHT % DOWNSAMPLETHRESHOLD % UNSHARP % QUALITY
+.
+.P
+\fBxputserver makeshadow\fR % FILENAME % STANDARDDEVIATION % OPACITY % COLOR % WIDTH % HEIGHT % FRAMEWIDTH % FRAMEHEIGHT % MARGIN % BORDERRADIUS
+.
+.P
+\fBxputserver start\fR [% import % [GRAPHICSPATH]] [% turbo % JOBNAME]
+.
+.P
+\fBxputserver batchoptimize\fR % BATCHLIST
+.
+.SH "DESCRIPTION"
+This script provides an interface for the Xput LaTeX class\.
+.
+.TP
+\fBxputserver getwidth\fR
+Returns the width in pixels for the given image file\.
+.
+.TP
+\fBxputserver optimize\fR
+Creates a cropped, rezised, sharpend and compressed image and stores it in the cache directory\.
+.
+.TP
+\fBxputserver makeshadow\fR
+Creates a shadow image and stores it in the cache directory\.
+.
+.TP
+\fBxputserver start\fR
+The import parameter triggers the image import (see xputmanual\.pdf chapter "Image Optimization")\. Running the command with the parameter turbo, where the jobname is the filename of the Xput document, processes the document in a special batch mode, that creates a batch list and calls the command \fBxputserver batchoptimize\fR\.
+.
+.TP
+\fBxputserver batchoptimize\fR
+Optimizes multiple images in parallel\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-\-help\fR
+Prints a help message\.
+.
+.TP
+\fB\-\-version\fR
+Prints version information\.
+.
+.SH "PARAMETERS"
+.
+.TP
+FILE
+filename with extension (eg\. IMG1234\.JPEG)
+.
+.TP
+FILENAME
+filename without extension (eg\. IMG1234)
+.
+.TP
+EXTENSION
+optimized file extension (\.jpg|\.png)
+.
+.TP
+DENSITY
+density in ppi (eg\. 72)
+.
+.TP
+DOWNSAMPLETHRESHOLD
+downsample threshold (integer >= 100)
+.
+.TP
+UNSHARP
+unsharp filter (eg\. 2x1)
+.
+.TP
+QUALITY
+quality (integer > 0, <= 100)
+.
+.TP
+STANDARDDEVIATION
+standard deviation (decimal > 0\.0)
+.
+.TP
+OPACITY
+opacity (decimal >= 0\.0, <= 1\.0)
+.
+.TP
+COLOR
+color string (eg\. pink)
+.
+.TP
+GRAPHICSPATH
+list of directories (eg\. {images/}{tmp/})
+.
+.TP
+JOBNAME
+LaTeX filename without extension (eg\. my\-document)
+.
+.TP
+BATCHLIST
+a flat list of batch items where each batch item is a flat list of the 15 parameters required by the command `xputserver optimize`
+.
+.P
+All other parameters are length dimensions\. The command \fBxputserver optimize\fR expects integer values in the LaTeX unit sp (eg\. 65536)\. The command \fBxputserver makeshadow\fR expects decimal values in a SVG compatible unit (eg\. 420\.0pt)\.
+.
+.SH "ENVIRONMENT"
+\fBxputserver\fR requires ImageMagick 7\.0 or later and Inkscape 1\.0 or later\.
+.
+.TP
+\fBXPUT_IMPORT_DIRECTORY\fR
+Defines a system wide import directory\.
+.
+.SH "AUTHOR"
+\fBxputserver\fR was written by Friedemann Bartels\. \fIhttps://github\.com/friedemannbartels\fR
+.
+.SH "LICENSE"
+Copyright (C) 2023 Friedemann Bartels\. Free use of this software is granted under the terms of the LaTeX Project Public License version 1\.3c or later\.

@@ -1,0 +1,73 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "TEXTESTVIS" "1" "January 2023" "" ""
+.
+.SH "NAME"
+\fBtextestvis\fR \- visual regression tests for LaTeX
+.
+.SH "SYNOPSIS"
+\fBtextestvis\fR [\-cs] [\-e ENGINE] [\-d DENSITY] [PATTERN]
+.
+.P
+\fBtextestvis approve\fR [\-e ENGINE] [PATTERN]
+.
+.P
+\fBtextestvis compare\fR [\-d DENSITY] FILE FILE
+.
+.P
+\fBtextestvis perf\fR [\-cs] [\-e ENGINE] FILE
+.
+.SH "DESCRIPTION"
+Perform visual regression tests for LaTeX documents\.
+.
+.TP
+\fBtextestvis\fR
+Creates PDF files for all tex files matching the pattern and performs a visual regression test\. If no pattern is specified, all files in the current directory are tested except for files whose names begin with an underscore\.
+.
+.TP
+\fBtextestvis approve\fR
+Replaces the reference files with the test files\.
+.
+.TP
+\fBtextestvis compare\fR
+Creates a visual diff for two pdf files\.
+.
+.TP
+\fBtextestvis perf\fR
+Measures the time for creating a pdf file from the given tex file\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-c\fR
+Clears cache\.
+.
+.TP
+\fB\-s\fR
+Enables shell escape\.
+.
+.TP
+\fB\-d\fR \fIDENSITY\fR
+Sets density in ppi (default 72)\.
+.
+.TP
+\fB\-e\fR \fIENGINE\fR
+Sets latex engine (default xelatex)\.
+.
+.TP
+\fB\-\-help\fR
+Prints a help message\.
+.
+.TP
+\fB\-\-version\fR
+Prints version information\.
+.
+.SH "ENVIRONMENT"
+\fBtextestvis\fR requires ImageMagick 7\.0 or later\.
+.
+.SH "AUTHOR"
+\fBtextestvis\fR was written by Friedemann Bartels\. \fIhttps://github\.com/friedemannbartels\fR
+.
+.SH "LICENSE"
+Copyright (C) 2023 Friedemann Bartels\. Free use of this software is granted under the terms of the LaTeX Project Public License version 1\.3c or later\.
