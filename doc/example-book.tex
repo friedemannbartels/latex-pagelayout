@@ -18,7 +18,7 @@
   beginright,
   % fanfold,
   import,
-  optimize={quality=50, density=144}
+  optimize={quality=50, density=72}
 ]{xput}
 
 \usepackage{lipsum}
@@ -57,14 +57,10 @@
   \template[back cover,margin=0mm, inner margin=0mm]{f}{}
 
   \page[front cover,color=white,page graphic=kopi, inner margin=\margin]{
-    \setgrid[width=100mm]{{{1}}}
-
     \text[bottom]{
-      \fontsize{41.3mm}{46mm}\selectfont
-      \hskip -3mm
-      Berlin
-      \fontsize{7.5mm}{13mm}\selectfont%
-      \mbox{Photos by Friedemann Bartels}
+      \fontsize{42mm}{46mm}\selectfont
+      \centering
+      KØPI
     }
 
     \ifspine{
@@ -73,7 +69,7 @@
       \tikzgraphic{
         \node[rotate=90] at (0.5\width,0.5\height){
           \fontsize{4mm}{8mm}\selectfont
-          Xput\ \
+          KØPI
         };
       }
     }
