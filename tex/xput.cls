@@ -1589,7 +1589,7 @@
     \innermargin=\xput@null
     \outermargin=\xput@null
     \setgrid{{{1}}}
-    \pgfkeys{graphic,scale=\xput@pagegraphicoptionscale,hpos=\xput@pagegraphicoptionhpos,vpos=\xput@pagegraphicoptionvpos,unsharp=\xput@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0}
+    \pgfkeys{graphic,scale=\xput@pagegraphicoptionscale,hpos=\xput@pagegraphicoptionhpos,vpos=\xput@pagegraphicoptionvpos,unsharp=\xput@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0,shadow xshift=0pt,shadow yshift=0pt}
     \xput@putgraphic{0}{0}{1}{1}{\xput@pagegraphic}
   \endgroup
 }
@@ -2017,13 +2017,13 @@
   \ifcsname xput@shadow@#1\endcsname
     \csname xput@shadow@#1\endcsname{}
   \else
-    \pgfkeys{defaultshadow,opacity=0.4,size=0,color=black,xshift=0pt,yshift=0pt}
+    \pgfkeys{defaultshadow,size=0,color=black,opacity=0.4,xshift=0pt,yshift=0pt}
     \xput@errmsg@undefined{shadow}{#1}
   \fi
 }
 \newcommand\newshadow[2]{
   \expandafter\newcommand\csname xput@shadow@#1\endcsname[1]{%
-    \pgfkeys{defaultshadow,opacity=0.4,size=0,color=black,xshift=0pt,yshift=0pt,#2,##1}
+    \pgfkeys{defaultshadow,size=0,color=black,opacity=0.4,xshift=0pt,yshift=0pt,#2,##1}
   }%
 }
 \pgfkeys{
@@ -2046,7 +2046,7 @@
 }
 \def\noshadow{\setshadow{}}
 \newcommand\xput@shadow[2]{
-  \pgfkeys{defaultshadow,size=0pt,color=black,opacity=1,xshift=0pt,yshift=0pt,#1}
+  \pgfkeys{defaultshadow,size=0,color=black,opacity=0.4,xshift=0pt,yshift=0pt,#1}
   \ifcsname xput@shadow@#2\endcsname
     \csname xput@shadow@#2\endcsname{#1}
   \fi
