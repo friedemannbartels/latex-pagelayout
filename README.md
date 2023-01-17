@@ -1,4 +1,4 @@
-# The pagelayout LaTeX class
+![The pagelayout LaTeX class](doc/banner.svg)
 
 The pagelayout class enables you to layout pages declaratively using simple macros for pages, covers, grids, templates, text, and graphics to create graphic rich, perfectly typeset, and print ready PDFs.
 

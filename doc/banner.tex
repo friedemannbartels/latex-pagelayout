@@ -1,0 +1,58 @@
+%%
+%% Copyright (C) 2023 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[graphpaper,draft]{pagelayout}
+\usepackage{microtype}
+\usepackage{fontspec}
+
+\setmainfont{Menlo}
+
+\pagewidth=14.5cm
+\pageheight=3cm
+\bleed=3mm
+\margin=5mm
+
+\begin{document}
+
+  \page{
+    \tikzgraphic{
+      \draw[line width=0.2mm,draw=pink] (0,0) rectangle (\width,\height);
+    }
+
+    \setgrid[y=\y-1.8mm]{{{}}}
+    \text[bottom]{
+      \fontsize{19.8pt}{24pt}\selectfont
+      T\kern-0.03em
+      h\kern-0.03em
+      e
+      p\kern0.01em
+      a\kern0.02em
+      g\kern0.00em
+      e\kern-0.1em
+      l\kern-0.03em
+      a\kern-0.02em
+      y\kern-0.04em
+      o\kern-0.03em
+      u\kern-0.06em
+      t\ 
+      \LaTeX\ 
+      c\kern-0.11em
+      l\kern-0.03em
+      a\kern-0.00em
+      s\kern-0.05em
+      s
+    }
+  }
+
+\end{document}
