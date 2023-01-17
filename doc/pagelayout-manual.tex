@@ -18,14 +18,14 @@
 \usepackage{tikz}
 \OnlyDescription
 \hypersetup{pdfborder={0 0 0}}
-\def\Xputversion{1.0.2}
+\def\pagelayoutversion{1.0.2}
 
 \begin{document}
 
 \title{
-  \Huge The \textsf{Xput} class\\
-  \Large\url{https://github.com/friedemannbartels/xput}\\
-  \Large Manual for Version \Xputversion
+  \Huge The \textsf{pagelayout} class\vskip3mm
+  \Large Manual for Version \pagelayoutversion\vskip3mm
+  \normalsize\url{https://github.com/friedemannbartels/latex-pagelayout}
 }
 
 \author{\href{mailto:mail@friedemannbartels.de}{Friedemann Bartels}}
@@ -40,18 +40,18 @@
 
 When Apple discontinued its photo book feature in Apple Photos, I was missing an easy-to-use photo book application.
 In 2020, I started to develop my own solution.
-What started with some SVG templates and shell scripts ended up in the Xput class, a declarative desktop publishing approach.
+What started with some SVG templates and shell scripts ended up in the pagelayout class, a declarative desktop publishing approach.
 \par
-With Xput you can create single- and double-sided documents, create pages with margins, safety margins, and bleed, use templates, align text and graphics in a grid, wrap text across multiple pages and use before pages.
+With the pagelayout class you can create single- and double-sided documents, create pages with margins, safety margins, and bleed, use templates, align text and graphics in a grid, wrap text across multiple pages and use before pages.
 Generic templates, automatic grid layout and a simple and consistent user interface make it easier than ever to create graphics-rich documents with \LaTeX.
-Under the hood Xput uses the TikZ and tcolorbox packages, ImageMagick and Inkscape.
+Under the hood the TikZ and tcolorbox packages, ImageMagick and Inkscape are used.
 
 \section{Document}\label{sec:document}
 
-The document options described in the following can be either set as a document option (|\documentclass[twoside]{xput}|) or with a macro (|\twoside|) in the preamble.
+The document options described in the following can be either set as a document option (|\documentclass[twoside]{pagelayout}|) or with a macro (|\twoside|) in the preamble.
 
 \DescribeMacro {\documentclass}
-Use the class and define your options with the |\documentclass|\oarg{options}|{xput}| macro.
+Use the class with the |\documentclass|\oarg{options}|{pagelayout}| macro.
 A single sided document is the default.
 \begin{figure}[h!]
 \begin{tikzpicture}
@@ -147,7 +147,7 @@ If you want your fanfold document to start with a right hand page, you can use t
 
 \subsection{Lengths}\label{subsec:size}
 
-The document lengths described below can be set either as a document option (|\documentclass[page width=21cm]{xput}|) or by assigning the dimension directly (|\pagewidth=21cm|) in the preamble or in the document.
+The document lengths described below can be set either as a document option (|\documentclass[page width=21cm]{pagelayout}|) or by assigning the dimension directly (|\pagewidth=21cm|) in the preamble or in the document.
 
 \DescribeMacro {\pagewidth}
 \DescribeMacro {\pageheight}
@@ -196,7 +196,7 @@ Read how to set the scale and crop of a page graphic with the |\newgraphic| macr
 
 \subsection{Layout Guides}
 
-The layout guides described in the following can be either set as a document option (|\documentclass[grid]{xput}|) or using a macro (|\grid|) in the preamble or the document.
+The layout guides described in the following can be either set as a document option (|\documentclass[grid]{pagelayout}|) or using a macro (|\grid|) in the preamble or the document.
 Layout guides can be switched on (|\safezone|) or off (|\nosafezone|).
 
 \DescribeMacro {\grid}
@@ -211,7 +211,7 @@ Show a graph paper with the |graph paper| option.
 
 \begin{figure}[h]
 \begin{tikzpicture}
-  \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[trim={15cm 16.5cm 0cm 0},clip,scale=1,page=1]{xputmanual-layout-guides.pdf}};
+  \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[trim={15cm 16.5cm 0cm 0},clip,scale=1,page=1]{pagelayout-manual-layout-guides.pdf}};
   \node[anchor=south west,text depth=0mm,text width=4cm] (bleed) at (65mm,33mm) {Bleed};
   \draw (bleed) -- ++(-32mm,0);
   \node[anchor=south west,text depth=0mm,text width=4cm] (bleed) at (65mm,27mm) {Safety margin};
@@ -420,7 +420,7 @@ You can define a border or shadow for a specific content box by using the option
 \par
 \DescribeMacro{\newborder}
 \DescribeMacro{\newshadow}
-Define a reusable border or shadow with the macros |\newborder|\marg{name}\marg{options} or |\newshadow|\marg{name}\marg{options}.
+Define a reusable border or shadow with the |\newborder|\marg{name}\marg{options} or |\newshadow|\marg{name}\marg{options} macros.
 Apply the border or shadow to |\text| or |\graphic| with the option |border| or |shadow|.
 \par
 \DescribeMacro{\setborder}
@@ -463,7 +463,7 @@ The |\import| macro helps you to streamline this process.
 When enabled, you need an import directory in which to place the modified files.
 When the document is created, the files are moved to your image directory and the corresponding cached versions are automatically regenerated.
 The import directory is either the directory \emph{import} in your working directory.
-Or you can set a system wide import directory by defining the shell variable |XPUT_IMPORT_DIRECTORY|.
+Or you can set a system wide import directory by defining the shell variable |PAGELAYOUT_IMPORT_DIRECTORY|.
 \par
 \DescribeMacro{\preflight}
 Use the |\preflight| macro to proof the image resolution.

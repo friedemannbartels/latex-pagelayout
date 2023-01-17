@@ -12,7 +12,7 @@
 %% LaTeX version 2008/05/04 or later.
 %%
 
-\documentclass[twoside,bleed=3mm,safetymargin=2mm,beginleft]{xput}
+\documentclass[twoside,bleed=3mm,safetymargin=2mm,beginleft]{pagelayout}
 
 \pagewidth=100mm
 \pageheight=100mm
@@ -34,45 +34,45 @@
 \newcommand\mim[1]{\the\numexpr#1*2540/7227*1000/65536\relax}
 \makeatletter
 \newcommand\printgrid{
-  w=\mim\xput@gridwidth\ h=\mim\xput@gridheight\
-  r=\the\numexpr 1000*\number\xput@gridwidth/\xput@gridheight\relax\\
-  \foreach \gridI in {1,...,\xput@rowscount} {
+  w=\mim\pal@gridwidth\ h=\mim\pal@gridheight\
+  r=\the\numexpr 1000*\number\pal@gridwidth/\pal@gridheight\relax\\
+  \foreach \gridI in {1,...,\pal@rowscount} {
     \ifnum\gridI=1
-      \ifnum\xput@get{if1F}=1\textbf{\mim{\xput@get{1HR}}}\else\mim{\xput@get{1HR}}\fi\ /\
-      \ifnum\xput@get{1C}>0
-        \ifnum\xput@get{if1-1F}=1\textbf{\mim{\xput@get{1-1WR}}}\else\mim{\xput@get{1-1WR}}\fi\
+      \ifnum\pal@get{if1F}=1\textbf{\mim{\pal@get{1HR}}}\else\mim{\pal@get{1HR}}\fi\ /\
+      \ifnum\pal@get{1C}>0
+        \ifnum\pal@get{if1-1F}=1\textbf{\mim{\pal@get{1-1WR}}}\else\mim{\pal@get{1-1WR}}\fi\
       \fi
-      \ifnum\xput@get{1C}>1
-        \ifnum\xput@get{if1-2F}=1\textbf{\mim{\xput@get{1-2WR}}}\else\mim{\xput@get{1-2WR}}\fi\
+      \ifnum\pal@get{1C}>1
+        \ifnum\pal@get{if1-2F}=1\textbf{\mim{\pal@get{1-2WR}}}\else\mim{\pal@get{1-2WR}}\fi\
       \fi
-      \ifnum\xput@get{1C}>2
-        \ifnum\xput@get{if1-3F}=1\textbf{\mim{\xput@get{1-3WR}}}\else\mim{\xput@get{1-3WR}}\fi\
+      \ifnum\pal@get{1C}>2
+        \ifnum\pal@get{if1-3F}=1\textbf{\mim{\pal@get{1-3WR}}}\else\mim{\pal@get{1-3WR}}\fi\
       \fi
       \\
     \else
       \ifnum\gridI=2
-        \ifnum\xput@get{if2F}=1\textbf{\mim{\xput@get{2HR}}}\else\mim{\xput@get{2HR}}\fi\ /\
-        \ifnum\xput@get{2C}>0
-          \ifnum\xput@get{if2-1F}=1\textbf{\mim{\xput@get{2-1WR}}}\else\mim{\xput@get{2-1WR}}\fi\
+        \ifnum\pal@get{if2F}=1\textbf{\mim{\pal@get{2HR}}}\else\mim{\pal@get{2HR}}\fi\ /\
+        \ifnum\pal@get{2C}>0
+          \ifnum\pal@get{if2-1F}=1\textbf{\mim{\pal@get{2-1WR}}}\else\mim{\pal@get{2-1WR}}\fi\
         \fi
-        \ifnum\xput@get{2C}>1
-          \ifnum\xput@get{if2-2F}=1\textbf{\mim{\xput@get{2-2WR}}}\else\mim{\xput@get{2-2WR}}\fi\
+        \ifnum\pal@get{2C}>1
+          \ifnum\pal@get{if2-2F}=1\textbf{\mim{\pal@get{2-2WR}}}\else\mim{\pal@get{2-2WR}}\fi\
         \fi
-        \ifnum\xput@get{2C}>2
-          \ifnum\xput@get{if2-3F}=1\textbf{\mim{\xput@get{2-3WR}}}\else\mim{\xput@get{2-3WR}}\fi\
+        \ifnum\pal@get{2C}>2
+          \ifnum\pal@get{if2-3F}=1\textbf{\mim{\pal@get{2-3WR}}}\else\mim{\pal@get{2-3WR}}\fi\
         \fi
         \\
       \else
         \ifnum\gridI=3
-          \ifnum\xput@get{if3F}=1\textbf{\mim{\xput@get{3HR}}}\else\mim{\xput@get{3HR}}\fi\ /\
-          \ifnum\xput@get{3C}>0
-            \ifnum\xput@get{if3-1F}=1\textbf{\mim{\xput@get{3-1WR}}}\else\mim{\xput@get{3-1WR}}\fi\
+          \ifnum\pal@get{if3F}=1\textbf{\mim{\pal@get{3HR}}}\else\mim{\pal@get{3HR}}\fi\ /\
+          \ifnum\pal@get{3C}>0
+            \ifnum\pal@get{if3-1F}=1\textbf{\mim{\pal@get{3-1WR}}}\else\mim{\pal@get{3-1WR}}\fi\
           \fi
-          \ifnum\xput@get{3C}>1
-            \ifnum\xput@get{if3-2F}=1\textbf{\mim{\xput@get{3-2WR}}}\else\mim{\xput@get{3-2WR}}\fi\
+          \ifnum\pal@get{3C}>1
+            \ifnum\pal@get{if3-2F}=1\textbf{\mim{\pal@get{3-2WR}}}\else\mim{\pal@get{3-2WR}}\fi\
           \fi
-          \ifnum\xput@get{3C}>2
-            \ifnum\xput@get{if3-3F}=1\textbf{\mim{\xput@get{3-3WR}}}\else\mim{\xput@get{3-3WR}}\fi\
+          \ifnum\pal@get{3C}>2
+            \ifnum\pal@get{if3-3F}=1\textbf{\mim{\pal@get{3-3WR}}}\else\mim{\pal@get{3-3WR}}\fi\
           \fi
           \\
         \fi

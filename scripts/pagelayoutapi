@@ -191,11 +191,11 @@ makeshadow() {
 import() {
   if [ -d import ]; then
     importdir=import
-  elif [ "$XPUT_IMPORT_DIRECTORY" != "" ]; then
-    if [ -d "$XPUT_IMPORT_DIRECTORY" ]; then
-      importdir="$XPUT_IMPORT_DIRECTORY"
+  elif [ "$PAGELAYOUT_IMPORT_DIRECTORY" != "" ]; then
+    if [ -d "$PAGELAYOUT_IMPORT_DIRECTORY" ]; then
+      importdir="$PAGELAYOUT_IMPORT_DIRECTORY"
     else
-      echo $XPUT_IMPORT_DIRECTORY
+      echo $PAGELAYOUT_IMPORT_DIRECTORY
       exit
     fi
   else
@@ -233,10 +233,10 @@ import() {
 startturbo() {
   file="$(echo $1 | sed -e 's/\.pdflatex$//g')"
   if [ -f $file.tex ]; then
-    tmpdir=$( mktemp -d 2>/dev/null )/xputturbo$( date "+%Y%m%d%H%M%S" )$RANDOM
+    tmpdir=$( mktemp -d 2>/dev/null )/pagelayoutturbo$( date "+%Y%m%d%H%M%S" )$RANDOM
     mkdir $tmpdir
 
-    cp $file.tex $tmpdir/xputturbobatchoptimizexyz.tex
+    cp $file.tex $tmpdir/pagelayoutturbobatchoptimizexyz.tex
 
     command=$(echo $(ps -p $PPID -o command ))
     engine=$(echo $command | sed -e 's/^[A-Z ]*//g' | sed -e 's/ .*//g' | tr -d '\n')
@@ -251,7 +251,7 @@ startturbo() {
       nopdf="-no-pdf"
     fi
 
-    $engine $shellescape -interaction=batchmode $nopdf --output-directory $tmpdir $tmpdir/xputturbobatchoptimizexyz.tex > /dev/null
+    $engine $shellescape -interaction=batchmode $nopdf --output-directory $tmpdir $tmpdir/pagelayoutturbobatchoptimizexyz.tex > /dev/null
 
     rm -rf $tmpdir
   fi
@@ -298,14 +298,14 @@ batchoptimize() {
 
 usage() {
   cat <<HELP_USAGE
-usage: xputserver getwidth % FILE
-       xputserver optimize % FILE % FILENAME % EXTENSION % ORIGINALWIDTH
+usage: pagelayoutapi getwidth % FILE
+       pagelayoutapi optimize % FILE % FILENAME % EXTENSION % ORIGINALWIDTH
          % ORIGINALHEIGHT % CROPLEFT % CROPRIGHT % CROPTOP % CROPBOTTOM
          % DENSITY % WIDTH % HEIGHT % DOWNSAMPLETHRESHOLD % UNSHARP % QUALITY
-       xputserver makeshadow % FILENAME % STANDARDDEVIATION % OPACITY % COLOR
+       pagelayoutapi makeshadow % FILENAME % STANDARDDEVIATION % OPACITY % COLOR
          % WIDTH % HEIGHT % FRAMEWIDTH % FRAMEHEIGHT % MARGIN % BORDERRADIUS
-       xputserver start [% import % [GRAPHICSPATH]] [% turbo % JOBNAME]
-       xputserver batchoptimize % BATCHLIST
+       pagelayoutapi start [% import % [GRAPHICSPATH]] [% turbo % JOBNAME]
+       pagelayoutapi batchoptimize % BATCHLIST
 
    --help      Prints a help message.
    --version   Prints version information.
@@ -313,7 +313,7 @@ HELP_USAGE
 }
 
 version() {
-  echo xputserver $version
+  echo pagelayoutapi $version
 }
 
 input=$( echo "$@" | sed -e 's/\\//g' | sed -e 's/ %/%/g' | sed -e 's/% /%/g' )

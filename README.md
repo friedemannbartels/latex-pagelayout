@@ -1,12 +1,12 @@
-## What is Xput
+# The pagelayout LaTeX class
 
-Xput is a LaTeX class to layout graphic rich, perfectly typeset, and print ready PDFs. It provides simple macros to put content on a page declaratively. Generic and custom templates, automatic grid layout, and a simple and consistent user interface help you to create layouts with ease.
+The pagelayout class enables you to layout pages declaratively using simple macros for pages, covers, grids, templates, text, and graphics to create graphic rich, perfectly typeset, and print ready PDFs.
 
 The integration of [Inkscape](https://inkscape.org) allows your to create box shadows. Text shadows and SVG filters are ideas for future releases.
 
 The integration of [ImageMagick](https://imagemagick.org) allows you to configure compression and sharpening for bitmap graphics to export web, print or preview versions of your document. Parallelized image optimization, caching, and a draft mode enable fast PDF creation and a responsive workflow, even for large documents with lots of photos and graphics.
 
-Xput also integrates the [TikZ](https://www.ctan.org/pkg/pgf) and [tcolorbox](https://www.ctan.org/pkg/tcolorbox) LaTeX packages.
+The pagelayout class also integrates the [TikZ](https://www.ctan.org/pkg/pgf) and [tcolorbox](https://www.ctan.org/pkg/tcolorbox) LaTeX packages.
 
 ## Quick Start
 
@@ -65,25 +65,25 @@ You can scale and position a graphic. And you can add borders and box shadows to
 
 ![Photo with border and shadow](doc/quickstart-3.svg)
 
-Have a look at the [examples](doc) to learn how to create double pages, cover pages, and more.
+Have a look at the [examples](doc) to learn how to create double pages, covers, and more.
 
-For a complete reference, read the [manual](doc/xputmanual.pdf).
+For a complete reference, read the [manual](doc/pagelayout-manual.pdf).
 
 ## Installation
 
-In general, you should use the package manager shipped with your TeX distribution to install Xput.
+In general, you should use the package manager shipped with your TeX distribution to install the pagelayout package.
 
-To install Xput manually, copy the contents of [xput.tds.zip](https://github.com/friedemannbartels/xput/releases/download/v1.0.2/xput.tds.zip) to your local TeX directory tree and run the command `texhash`.
+To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/v1.0.2/pagelayout.tds.zip) to your local TeX directory tree and run the command `texhash`.
 
 To enable image optimization, shadow creation, and preflight, perform these installation steps:
 
 - Make sure that ImageMagick 7.0 or later and Inkscape 1.0 or later are installed.
 
-- Find your top level _texmf.cnf_ with the command `kpsewhich texmf.cnf`, and add `xputserver` to the list of `shell_escape_commands`.
+- Find your top level _texmf.cnf_ with the command `kpsewhich texmf.cnf`, and add `pagelayoutapi` to the list of `shell_escape_commands`.
   ```
-  shell_escape_commands = xputserver
+  shell_escape_commands = pagelayoutapi
   ```
-- When installing manually, add the directory _scripts/xput_ to your `PATH`.
+- When installing manually, add the directory _scripts/pagelayout_ to your `PATH`.
 
 ## Development
 
