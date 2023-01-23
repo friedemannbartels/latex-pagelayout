@@ -1,5 +1,5 @@
 %%
-%% Copyright (C) 2022 by Friedemann Bartels
+%% Copyright (c) 2022-2023 by Friedemann Bartels
 %%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either
@@ -13,8 +13,8 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{pagelayout}[2023/01/02 desktop publishing]
-\def\pagelayoutversion{1.0.2}
+\ProvidesClass{pagelayout}[2023/01/23 Layout graphic rich documents]
+\def\pagelayoutversion{1.0.3}
 
 % packages
 \RequirePackage{pgfopts}

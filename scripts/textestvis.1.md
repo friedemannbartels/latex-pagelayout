@@ -52,4 +52,4 @@ Perform visual regression tests for LaTeX documents.
 
 ## LICENSE
 
-Copyright (C) 2023 Friedemann Bartels. Free use of this software is granted under the terms of the LaTeX Project Public License version 1.3c or later.
+Copyright (c) 2022-2023 Friedemann Bartels. Free use of this software is granted under the terms of the LaTeX Project Public License version 1.3c or later.
