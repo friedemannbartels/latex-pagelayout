@@ -1,0 +1,46 @@
+%%
+%% Copyright (c) 2022-2023 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[optimize={density=72},graphpaper,preflight,fanfold]{pagelayout}
+
+\pagewidth=200mm
+\pageheight=200mm
+\gutter=20mm
+\margin=20mm
+
+\newborder{primary}{width=6mm,color=white,opacity=1}
+\newshadow{primary}{size=10,opacity=0.6,color=red}
+
+\begin{document}
+  \page[back cover, margin=50mm,page color=pink]{
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{_PAX706;7&! -- ?= (1).<,.JPEG}
+  }
+
+  \page[front cover, margin=50mm,page color=pink]{
+    \setgrid[x=\x,y=\y]{{{}}}
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{1x1}
+    \setgrid[x=17cm, y=17cm]{{{}}}
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{_PAX706;7&! -- ?= (1).<,.JPEG}
+  }
+
+  \page[margin=50mm,page color=pink]{
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{_PAX706;7&! -- ?= (1).<,.JPEG}
+  }
+
+  \page[margin=50mm,page color=pink]{
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{1x1}
+    \setgrid[x=17cm, y=17cm]{{{}}}
+    \graphic[shadow=primary,border=primary,border radius=0.5\width]{_PAX706;7&! -- ?= (1).<,.JPEG}
+  }
+\end{document}

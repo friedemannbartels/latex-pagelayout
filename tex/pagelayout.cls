@@ -1532,8 +1532,20 @@
   \height=\dimexpr(\pal@yy - \pal@y)\relax
   \pal@x=\dimexpr(\pal@x + \width)\relax
   \pal@y=\dimexpr(\pal@y + \height)\relax
-  \ifdim\pal@x>\dimexpr\pal@pagewidth+\pal@innerbleed+\pal@outerbleed\relax
-    \pal@x=\dimexpr\pal@pagewidth+\pal@innerbleed+\pal@outerbleed\relax
+  \ifpal@frontcover
+    \ifdim\pal@x>\dimexpr2\pal@pagewidth+2\pal@outerbleed+\spinewidth\relax
+      \pal@x=\dimexpr2\pal@pagewidth+2\pal@outerbleed+\spinewidth\relax
+    \fi
+  \else
+    \ifpal@fanfold
+      \ifdim\pal@x>\dimexpr2\pal@pagewidth+2\pal@outerbleed\relax
+        \pal@x=\dimexpr2\pal@pagewidth+2\pal@outerbleed\relax
+      \fi
+    \else
+      \ifdim\pal@x>\dimexpr\pal@pagewidth+\pal@innerbleed+\pal@outerbleed\relax
+        \pal@x=\dimexpr\pal@pagewidth+\pal@innerbleed+\pal@outerbleed\relax
+      \fi
+    \fi
   \fi
   \ifdim\pal@y>\dimexpr\pal@pageheight+\pal@topbleed+\pal@bottombleed\relax
     \pal@y=\dimexpr\pal@pageheight+\pal@topbleed+\pal@bottombleed\relax
