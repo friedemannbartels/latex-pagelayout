@@ -391,8 +391,8 @@
   \x=\dimexpr\pal@gridstartx{\pal@undefdim}-\pal@leftbleed\relax
   \y=\dimexpr\pal@gridstarty{\pal@undefdim}-\pal@bottombleed\relax
 
-  \pal@gridstartxdim=\dimexpr\pal@gridstartx{\pal@gridoptionx}\relax
-  \pal@gridstartydim=\dimexpr\pal@gridstarty{\pal@gridoptiony}\relax
+  \pal@gridstartxdim=\dimexpr\pal@gridstartx{\pal@gridoptionx} - \pal@gutter / 2\relax
+  \pal@gridstartydim=\dimexpr\pal@gridstarty{\pal@gridoptiony} - \pal@gutter / 2\relax
 
   \pal@gridwidth=\dimexpr\pal@calculatefullgridwidth\relax
   \ifnum\rowsH>0
@@ -728,7 +728,7 @@
 \newcommand\pal@gridstartx[1]{
   \ifdim\dimexpr#1\relax=\pal@undefdim
     \ifpal@isdoublepage
-      (\pal@outermargin + \pal@leftbleed - \pal@gutter / 2
+      (\pal@outermargin + \pal@leftbleed
       \ifpal@frontcover
       \else
         \ifpal@fanfold
@@ -740,11 +740,11 @@
       \fi
       )
     \else
-      (\pal@leftmargin + \pal@leftbleed - \pal@gutter / 2)
+      (\pal@leftmargin + \pal@leftbleed)
     \fi
   \else%
     \ifpal@isdoublepage
-      (#1 + \pal@leftbleed - \pal@gutter / 2
+      (#1 + \pal@leftbleed
       \ifpal@frontcover
       \else
         \ifpal@fanfold
@@ -756,15 +756,15 @@
       \fi
       )
     \else
-      (#1 + \pal@leftbleed - \pal@gutter / 2)
+      (#1 + \pal@leftbleed)
     \fi
   \fi%
 }
 \newcommand\pal@gridstarty[1]{
   \ifdim\dimexpr#1\relax=\pal@undefdim
-    (\pal@bottommargin + \pal@bottombleed - \pal@gutter / 2)%
+    (\pal@bottommargin + \pal@bottombleed)%
   \else%
-    (#1 + \pal@bottombleed - \pal@gutter / 2)
+    (#1 + \pal@bottombleed)
   \fi%
 }
 \newcommand\pal@setdimensions{
