@@ -3732,11 +3732,7 @@
   \ClassError{pagelayout}{Shell access forbidden. #1}{Make sure `pagelayoutapi' is added to the list of shell escape commands\MessageBreak(shell_escape_commands = pagelayoutapi) in your `texmf.cnf'.\MessageBreak\MessageBreak\@ehc}
 }
 \def\pal@errmsg@shellaccessfailed#1{
-  \ifdefined\XeTeXversion
-    \ClassError{pagelayout}{Shell access failed. #1}{Make sure the `scripts' folder is added to your path.\MessageBreak\MessageBreak\@ehc}
-  \else
-    \ClassError{pagelayout}{Shell access failed. #1}{Make sure the `scripts' folder is added to your path.\MessageBreak Shell access does not work in unrestricted mode (--shell-escape).\MessageBreak Make sure `pagelayoutapi' is added to the list of shell escape commands\MessageBreak(shell_escape_commands = pagelayoutapi) in your `texmf.cnf'.\MessageBreak\MessageBreak\@ehc}
-  \fi
+  \ClassError{pagelayout}{Shell access failed. #1}{Make sure the `scripts' folder is added to your path.\MessageBreak\MessageBreak\@ehc}
 }
 \def\pal@errmsg@inkscapenotinstalled#1{
   \ClassError{pagelayout}{Inkscape not installed. #1}{Make sure Inkscape is installed.\MessageBreak\MessageBreak\@ehc}
