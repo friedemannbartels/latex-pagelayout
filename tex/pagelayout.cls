@@ -13,8 +13,8 @@
 %%
 
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{pagelayout}[2023/01/23 Layout graphic rich documents]
-\def\pagelayoutversion{1.0.3}
+\ProvidesClass{pagelayout}[2023/03/05 Layout graphic rich documents]
+\def\pagelayoutversion{1.0.4}
 
 % packages
 \RequirePackage{pgfopts}
