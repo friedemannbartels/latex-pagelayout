@@ -3160,6 +3160,7 @@
 \newif\ifpal@placeholderoptions
 \newif\ifpal@placeholdermode
 \newif\ifpal@isplace
+\newif\ifpal@template
 \pal@placeholderoptionstrue
 \newcount\pal@placeholdercounter
 \newcount\pal@contentcounter
@@ -3228,6 +3229,7 @@
   \def\pal@tmp{\pal@currentcontents}
   \pal@placeholdermode{1}
   \pal@tmp
+  \pal@templatetrue
   \pal@placeholdermode{0}
   \pal@putcontent{
     \ifx\pal@emptystring\pal@currentplaceholder
@@ -3287,6 +3289,7 @@
       \fi
     \fi
   }
+  \pal@templatefalse
   \endgroup
 }
 \newcommand\pal@graphic[2][]{
@@ -3390,7 +3393,9 @@
           \ifcsname pal@graphic@##2\endcsname%
             \csname pal@graphic@##2\endcsname[2]{##1}
           \else
-            \pgfkeys{graphic,file={##2},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,##1}
+            \ifpal@template\else
+              \pgfkeys{graphic,file={##2},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,##1}
+            \fi
           \fi
         \fi
         \pal@putgraphic{\pal@framey}{\pal@framex}{\pal@frameyy}{\pal@framexx}{\pal@graphicoptionfile}%
@@ -3421,7 +3426,9 @@
         \edef\pal@currentborderwidth{\pal@defaultborderwidth}
         \edef\pal@currentbordercolor{\pal@defaultbordercolor}
         \edef\pal@currentborderopacity{\pal@defaultborderopacity}
-        \pgfkeys{text,name=default,color=\ifx\pal@pageoptioncolor\pal@emptystring\paloptions@color\else\pal@pageoptioncolor\fi,border radius=\pal@currentborderradius,border width=\pal@currentborderwidth,border color=\pal@currentbordercolor,border opacity=\pal@currentborderopacity,##1}
+        \ifpal@template\else
+          \pgfkeys{text,name=default,color=\ifx\pal@pageoptioncolor\pal@emptystring\paloptions@color\else\pal@pageoptioncolor\fi,border radius=\pal@currentborderradius,border width=\pal@currentborderwidth,border color=\pal@currentbordercolor,border opacity=\pal@currentborderopacity,##1}
+        \fi
         \pal@puttext{\pal@framey}{\pal@framex}{\pal@frameyy}{\pal@framexx}{##2}%
         \pal@resetgridframe
       }
