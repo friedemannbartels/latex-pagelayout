@@ -2825,6 +2825,7 @@
     \fi
   \fi
 }
+\newcommand\xpage[2][]{}
 \newcommand\pal@standardpage[2][]{
   \global\pal@placeholdercounter=0\relax
   \ifpal@backcover
@@ -3372,6 +3373,7 @@
     #3
   }
 }
+\newcommand\xtemplate[3][]{}
 \newcommand\graphic{}
 \newcommand\xput{}
 \newcommand\tikzgraphic{}
