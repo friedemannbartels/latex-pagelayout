@@ -3161,6 +3161,7 @@
 \newif\ifpal@placeholdermode
 \newif\ifpal@isplace
 \newif\ifpal@template
+\newif\ifpal@currentplaceholder
 \pal@placeholderoptionstrue
 \newcount\pal@placeholdercounter
 \newcount\pal@contentcounter
@@ -3219,7 +3220,7 @@
   \else
     \global\pal@isplacetrue
   \fi
-  \def\pal@currentplaceholder{}
+  \def\pal@currentplaceholdercontent{}
   \ifnum#1=0
     \global\advance \pal@placeholdercounter by 1
   \else
@@ -3232,7 +3233,19 @@
   \pal@templatetrue
   \pal@placeholdermode{0}
   \pal@putcontent{
-    \ifx\pal@emptystring\pal@currentplaceholder
+    \ifpal@currentplaceholder
+      \ifx#2\pal@emptystring
+      \else
+        \pal@setgridframe #2 \\
+      \fi
+      \ifx\pal@currentplaceholderoptions\pal@emptystring
+        \pal@placeholderoptionsfalse
+        \csname \pal@currentplaceholdertype\endcsname{\pal@currentplaceholdercontent}
+        \pal@placeholderoptionstrue
+      \else
+        \csname \pal@currentplaceholdertype\endcsname[\pal@currentplaceholderoptions]{\pal@currentplaceholdercontent}
+      \fi
+    \else
       \ifpal@placeholder
         \ifx#2\pal@emptystring
         \else
@@ -3275,18 +3288,6 @@
           \fi
         \fi
       \fi
-    \else
-      \ifx#2\pal@emptystring
-      \else
-        \pal@setgridframe #2 \\
-      \fi
-      \ifx\pal@currentplaceholderoptions\pal@emptystring
-        \pal@placeholderoptionsfalse
-        \csname \pal@currentplaceholdertype\endcsname{\pal@currentplaceholder}
-        \pal@placeholderoptionstrue
-      \else
-        \csname \pal@currentplaceholdertype\endcsname[\pal@currentplaceholderoptions]{\pal@currentplaceholder}
-      \fi
     \fi
   }
   \pal@templatefalse
@@ -3302,7 +3303,8 @@
       \csname pal@graphic@#2\endcsname[2]{#1}%
     \fi
 
-    \edef\pal@currentplaceholder{\pal@graphicoptionfile}
+    \edef\pal@currentplaceholdercontent{\pal@graphicoptionfile}
+    \pal@currentplaceholdertrue
   \fi
 }
 \newcommand\pal@xput[1]{
@@ -3310,7 +3312,8 @@
   \ifnum\pal@contentcounter=\pal@placeholdercounter
     \def\pal@currentplaceholdertype{xput}
     \def\pal@currentplaceholderoptions{}
-    \def\pal@currentplaceholder{#1}
+    \def\pal@currentplaceholdercontent{#1}
+    \pal@currentplaceholdertrue
   \fi
 }
 \newcommand\pal@tikz[1]{
@@ -3318,7 +3321,8 @@
   \ifnum\pal@contentcounter=\pal@placeholdercounter
     \def\pal@currentplaceholdertype{tikzgraphic}
     \def\pal@currentplaceholderoptions{}
-    \def\pal@currentplaceholder{#1}
+    \def\pal@currentplaceholdercontent{#1}
+    \pal@currentplaceholdertrue
   \fi
 }
 \newcommand\pal@text[2][]{
@@ -3331,7 +3335,8 @@
     \edef\pal@currentbordercolor{\pal@defaultbordercolor}
     \edef\pal@currentborderopacity{\pal@defaultborderopacity}
     \pgfkeys{text,name=default,color=\ifx\pal@pageoptioncolor\pal@emptystring\paloptions@color\else\pal@pageoptioncolor\fi,border radius=\pal@currentborderradius,border width=\pal@currentborderwidth,border color=\pal@currentbordercolor,border opacity=\pal@currentborderopacity,#1}
-    \def\pal@currentplaceholder{#2}
+    \def\pal@currentplaceholdercontent{#2}
+    \pal@currentplaceholdertrue
   \fi
 }
 \def\pal@placeholdertypeusetext{usetext}
@@ -3340,7 +3345,8 @@
   \ifnum\pal@contentcounter=\pal@placeholdercounter
     \edef\pal@currentplaceholdertype{\pal@placeholdertypeusetext}
     \def\pal@currentplaceholderoptions{#1}
-    \def\pal@currentplaceholder{}
+    \def\pal@currentplaceholdercontent{}
+    \pal@currentplaceholdertrue
   \fi
 }
 \newcommand\pal@rendertemplate[3]{
