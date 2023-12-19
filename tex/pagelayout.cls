@@ -3630,20 +3630,24 @@
 \def\pal@err@magicknotinstalled{errormagicknotinstalled}
 \def\pal@err@inkscapenotinstalled{errorinkscapenotinstalled}
 \newcommand\pal@getppi[1]{
-  \immediate\openin\pal@scriptresult={|pagelayoutapi getwidth\% "#1"}
+  \immediate\openin\pal@scriptresult={|pagelayoutapi \ifdim\pal@originalgraphicwidth<\pal@originalgraphicheight getwidth\else getheight\fi\% "#1"}
   \ifeof\pal@scriptresult
     \pal@errmsg@shellaccessforbidden{Ppi not calculated}
   \else
     \endlinechar=-1
-    \read\pal@scriptresult to \pal@graphicwidth
+    \read\pal@scriptresult to \pal@graphicsize
     \endlinechar=13
-    \ifx\pal@graphicwidth\pal@emptystring
+    \ifx\pal@graphicsize\pal@emptystring
       \pal@errmsg@shellaccessfailed{Ppi not calculated}
     \else
-      \ifx\pal@graphicwidth\pal@err@magicknotinstalled
+      \ifx\pal@graphicsize\pal@err@magicknotinstalled
         \pal@errmsg@magicknotinstalled{Ppi not calculated}
       \else
-        \pgfmathqparse{(\pal@originalgraphicwidth - \pal@cropleft - \pal@cropright) / \pal@originalgraphicwidth * \pal@graphicwidth pt / \the\width * 72.27pt}
+        \ifdim\pal@originalgraphicwidth<\pal@originalgraphicheight
+          \pgfmathqparse{(\pal@originalgraphicwidth - \pal@cropleft - \pal@cropright) / \pal@originalgraphicwidth * \pal@graphicsize pt / \the\width * 72.27pt}
+        \else
+          \pgfmathqparse{(\pal@originalgraphicheight - \pal@croptop - \pal@cropbottom) / \pal@originalgraphicheight * \pal@graphicsize pt / \the\height * 72.27pt}
+        \fi
 
         \pgfmathint{\pgfmathresult}
         \edef\pal@graphicdensity{\pgfmathresult}

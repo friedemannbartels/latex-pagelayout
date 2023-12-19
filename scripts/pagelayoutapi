@@ -100,6 +100,17 @@ getwidth() {
   fi
 }
 
+getheight() {
+  if command -v magick >/dev/null 2>&1; then
+    filename=$1
+
+    originalheight=$( magick identify -ping -format %h "$filename" )
+    echo $originalheight
+  else
+    echo errormagicknotinstalled
+  fi
+}
+
 optimize() {
   if command -v magick >/dev/null 2>&1; then
     filenamecache=$2
@@ -299,6 +310,7 @@ batchoptimize() {
 usage() {
   cat <<HELP_USAGE
 usage: pagelayoutapi getwidth % FILE
+       pagelayoutapi getheight % FILE
        pagelayoutapi optimize % FILE % FILENAME % EXTENSION % ORIGINALWIDTH
          % ORIGINALHEIGHT % CROPLEFT % CROPRIGHT % CROPTOP % CROPBOTTOM
          % DENSITY % WIDTH % HEIGHT % DOWNSAMPLETHRESHOLD % UNSHARP % QUALITY
@@ -326,6 +338,11 @@ getwidth)
   shift
 
   getwidth "$1"
+  ;;
+getheight)
+  shift
+
+  getheight "$1"
   ;;
 optimize)
   shift
