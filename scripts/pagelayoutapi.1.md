@@ -5,6 +5,8 @@ pagelayoutapi(1) -- API for the pagelayout LaTeX class
 
 `pagelayoutapi getwidth` % FILE
 
+`pagelayoutapi getheight` % FILE
+
 `pagelayoutapi optimize` % FILE % FILENAME % EXTENSION % ORIGINALWIDTH % ORIGINALHEIGHT % CROPLEFT % CROPRIGHT % CROPTOP % CROPBOTTOM % DENSITY % WIDTH % HEIGHT % DOWNSAMPLETHRESHOLD % UNSHARP % QUALITY
 
 `pagelayoutapi makeshadow` % FILENAME % STANDARDDEVIATION % OPACITY % COLOR % WIDTH % HEIGHT % FRAMEWIDTH % FRAMEHEIGHT % MARGIN % BORDERRADIUS
@@ -19,6 +21,9 @@ This script provides an API for the pagelayout LaTeX class.
 
 * `pagelayoutapi getwidth`:
     Returns the width in pixels for the given image file.
+
+* `pagelayoutapi getheight`:
+    Returns the height in pixels for the given image file.
 
 * `pagelayoutapi optimize`:
     Creates a cropped, rezised, sharpend and compressed image and stores it in the cache directory.

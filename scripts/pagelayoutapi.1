@@ -1,13 +1,16 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "PAGELAYOUTAPI" "1" "January 2023" "" ""
+.TH "PAGELAYOUTAPI" "1" "December 2023" "" ""
 .
 .SH "NAME"
 \fBpagelayoutapi\fR \- API for the pagelayout LaTeX class
 .
 .SH "SYNOPSIS"
 \fBpagelayoutapi getwidth\fR % FILE
+.
+.P
+\fBpagelayoutapi getheight\fR % FILE
 .
 .P
 \fBpagelayoutapi optimize\fR % FILE % FILENAME % EXTENSION % ORIGINALWIDTH % ORIGINALHEIGHT % CROPLEFT % CROPRIGHT % CROPTOP % CROPBOTTOM % DENSITY % WIDTH % HEIGHT % DOWNSAMPLETHRESHOLD % UNSHARP % QUALITY
@@ -27,6 +30,10 @@ This script provides an API for the pagelayout LaTeX class\.
 .TP
 \fBpagelayoutapi getwidth\fR
 Returns the width in pixels for the given image file\.
+.
+.TP
+\fBpagelayoutapi getheight\fR
+Returns the height in pixels for the given image file\.
 .
 .TP
 \fBpagelayoutapi optimize\fR
@@ -122,4 +129,4 @@ Defines a system wide import directory\.
 \fBpagelayoutapi\fR was written by Friedemann Bartels\. \fIhttps://github\.com/friedemannbartels\fR
 .
 .SH "LICENSE"
-Copyright (c) 2022-2023 Friedemann Bartels\. Free use of this software is granted under the terms of the LaTeX Project Public License version 1\.3c or later\.
+Copyright (c) 2022\-2023 Friedemann Bartels\. Free use of this software is granted under the terms of the LaTeX Project Public License version 1\.3c or later\.

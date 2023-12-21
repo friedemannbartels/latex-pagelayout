@@ -15,7 +15,7 @@ The pagelayout class also integrates the [TikZ](https://www.ctan.org/pkg/pgf) an
 Generic templates are the easiest way to put content on a page. The template name describes the layout. You can arrange [l]andscape, [p]ortrait, [s]quare, [w]ide, [g]olden ratio, g[o]lden upright ratio or [f]lexible placeholders in rows [-]. A valid template name for example is `sg-ff`. Notice you cannot combine flexible with fixed aspect ratio placeholders within a row.
 
 ```latex
-\template{ss}{
+\template{ff}{
   \text{
     This text fills the first placeholder.
   }
@@ -73,7 +73,7 @@ For a complete reference, read the [manual](doc/pagelayout-manual.pdf).
 
 In general, you should use the package manager shipped with your TeX distribution to install the pagelayout package.
 
-To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/v1.0.4/pagelayout.tds.zip) to your local TeX directory tree and run the command `texhash`.
+To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/v1.0.5/pagelayout.tds.zip) to your local TeX directory tree and run the command `texhash`.
 
 To enable image optimization, shadow creation, and preflight, perform these installation steps:
 
@@ -88,3 +88,7 @@ To enable image optimization, shadow creation, and preflight, perform these inst
 ## Development
 
 Run visual regression tests inside the _tests_ directory with the command `textestvis`.
+
+## License
+
+Copyright (c) 2022-2023 Friedemann Bartels. Free use of this software is granted under the terms of the LaTeX Project Public License version 1.3c or later.

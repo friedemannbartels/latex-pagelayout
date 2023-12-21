@@ -13,7 +13,7 @@
 # LaTeX version 2008/05/04 or later.
 #
 
-version=1.0.4
+version=1.0.5
 
 _convert() {
   turbo=$1
