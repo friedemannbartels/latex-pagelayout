@@ -2550,11 +2550,11 @@
   \ifx\pal@pagecolor\pal@emptystring
   \else
     \begingroup
-      \margin=\pal@null
-      \topmargin=\pal@null
-      \bottommargin=\pal@null
-      \innermargin=\pal@null
-      \outermargin=\pal@null
+      \margin=-1pt
+      \topmargin=-1pt
+      \bottommargin=-1pt
+      \innermargin=\ifpal@fanfold\pal@null\else-1pt\fi
+      \outermargin=-1pt
       \setgrid{{{1}}}
       \ifx\pal@pagecolormodel\pal@emptystring
       \else
