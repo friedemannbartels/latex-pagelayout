@@ -272,7 +272,11 @@ batchoptimize() {
   [ ! -d cache ] && mkdir cache
 
   length=$(( $# / 15 ))
-  cores=$( nproc )
+  if command -v nproc >/dev/null 2>&1; then
+    cores=$( nproc )
+  else
+    cores=1
+  fi
   [ $cores -gt $length ] && cores=$length
 
   while [ $length -gt 0 ]; do
