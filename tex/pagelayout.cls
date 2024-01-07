@@ -2196,13 +2196,14 @@
 }
 \def\pal@drawshadow{
   \pal@ifshadow{
-    \xdef\pal@shadowid{shadow-\pal@defaultshadowsize-\pal@defaultshadowcolor-\pal@defaultshadowopacity-\the\numexpr\pal@frameshadowwidth\relax-\the\numexpr\pal@frameshadowheight\relax-\the\numexpr\pal@frameshadowradius\relax-\the\numexpr\pal@frameshadowborder\relax}
+    \convertcolorspec{named}{\pal@defaultshadowcolor}{RGB}\pal@colortmp
+    \xdef\pal@shadowid{shadow-\pal@defaultshadowsize-\pal@colortmp-\pal@defaultshadowopacity-\the\numexpr\pal@frameshadowwidth\relax-\the\numexpr\pal@frameshadowheight\relax-\the\numexpr\pal@frameshadowradius\relax-\the\numexpr\pal@frameshadowborder\relax}
     \IfFileExists{./cache/\pal@shadowid/s.pdf}{
     \put(\pal@dimentonumber{\dimexpr\pal@x-5cm-\pal@frameshadowoffsetx+\pal@defaultshadowxshift\relax},\pal@dimentonumber{\dimexpr\pal@y-5cm-\pal@frameshadowoffsety-\pal@defaultshadowyshift\relax}){%
       \includegraphics[width=\pal@frameshadowwidth]{cache/\pal@shadowid/s.pdf}
     }
     }{
-      \pal@makeshadow{\pal@shadowid}
+      \pal@makeshadow{\pal@shadowid}{\pal@colortmp}
       \IfFileExists{./cache/\pal@shadowid/s.pdf}{
       \put(\pal@dimentonumber{\dimexpr\pal@x-5cm-\pal@frameshadowoffsetx+\pal@defaultshadowxshift\relax},\pal@dimentonumber{\dimexpr\pal@y-5cm-\pal@frameshadowoffsety-\pal@defaultshadowyshift\relax}){%
         \includegraphics[width=\pal@frameshadowwidth]{cache/\pal@shadowid/s.pdf}
@@ -3811,8 +3812,8 @@
   \fi
   \immediate\closein\pal@scriptresult
 }
-\newcommand\pal@makeshadow[1]{
-  \immediate\openin\pal@scriptresult={|pagelayoutapi makeshadow\%#1\%\pal@defaultshadowsize\%\pal@defaultshadowopacity\%\pal@defaultshadowcolor\%\the\pal@frameshadowwidth\%\the\pal@frameshadowheight\%\the\pal@frameshadowframewidth\%\the\pal@frameshadowframeheight\%\the\pal@frameshadowborder\%\the\pal@frameshadowradius}
+\newcommand\pal@makeshadow[2]{
+  \immediate\openin\pal@scriptresult={|pagelayoutapi makeshadow\%#1\%\pal@defaultshadowsize\%\pal@defaultshadowopacity\%#2\%\the\pal@frameshadowwidth\%\the\pal@frameshadowheight\%\the\pal@frameshadowframewidth\%\the\pal@frameshadowframeheight\%\the\pal@frameshadowborder\%\the\pal@frameshadowradius}
   \ifeof\pal@scriptresult
     \edef\pal@processresult{\pal@err@shellaccessforbidden}
     \pal@errmsg@shellaccessforbidden{Shadow not created}

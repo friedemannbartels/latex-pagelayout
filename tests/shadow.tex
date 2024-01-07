@@ -19,6 +19,8 @@
 \gutter=20mm
 \margin=20mm
 
+\definecolor{pink2}{RGB}{255,43,127}
+
 \newborder{primary}{
   width=4mm,
   color=white,
@@ -32,7 +34,7 @@
 \begin{document}
   \template[page color=pink]{ff-ff}{
     \graphic[shadow size=10,shadow color=cyan,shadow opacity=0.9]{3x2}
-    \graphic[shadow size=5,border width=4mm,border color=red,shadow color=red,border opacity=0.3,border radius=8mm,shadow opacity=0.7]{1x1}
+    \graphic[shadow size=10,border width=4mm,border color=pink2,shadow color=pink2,border opacity=0.2,border radius=8mm,shadow opacity=1]{1x1}
     \graphic[shadow size=5,shadow color=yellow,border width=2mm,shadow opacity=0.8]{2x1}
     \graphic[shadow size=10,shadow color=white,shadow opacity=1,border radius=0.5\width]{1x1}
   }

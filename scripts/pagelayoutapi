@@ -181,7 +181,7 @@ makeshadow() {
           </filter>
         </defs>
         <rect
-          style='filter:url(#blur);opacity:$opacity;fill:$fill'
+          style='filter:url(#blur);opacity:$opacity;fill:rgb($fill)'
           width='$framewidth'
           height='$frameheight'
           x='$frameborder'
