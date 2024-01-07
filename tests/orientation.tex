@@ -1,0 +1,108 @@
+\documentclass{pagelayout}
+
+\pagewidth=105mm
+\pageheight=105mm
+\bleed=5mm
+
+\safezone
+% \preflight
+
+\renewcommand\caption[1]{
+  \text[bottom]{\centering#1\\\ }
+}
+\newtemplate[gutter=2mm]{four}{
+  \setgrid{
+    {{}{}}
+    {{}{}}
+  }
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+  \setgrid{
+    {{}{}}
+    {{}{}}
+  }
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+  \placeholder{}
+}
+
+\def\testcase{
+  \template[margin=0mm]{four}{
+    \graphic[orientation=1,scale=1.5,vpos=0.4,hpos=0.2]{f}
+    \graphic[orientation=2,scale=1.5,vpos=0.4,hpos=0.2]{f}
+    \graphic[orientation=4,scale=1.5,vpos=0.4,hpos=0.2]{f}
+    \graphic[orientation=3,scale=1.5,vpos=0.4,hpos=0.2]{f}
+
+    \caption{1}
+    \caption{2}
+    \caption{4}
+    \caption{3}
+  }
+
+  \template[margin=0mm]{four}{
+    \graphic[orientation=7,scale=1.5,vpos=0.4,hpos=0.3]{f}
+    \graphic[orientation=6,scale=1.5,vpos=0.4,hpos=0.3]{f}
+    \graphic[orientation=8,scale=1.5,vpos=0.4,hpos=0.3]{f}
+    \graphic[orientation=5,scale=1.5,vpos=0.4,hpos=0.3]{f}
+
+    \caption{7}
+    \caption{6}
+    \caption{8}
+    \caption{5}
+  }
+}
+
+\begin{document}
+
+  \template{four}{
+    \graphic[orientation=1]{f}
+    \graphic[orientation=2]{f}
+    \graphic[orientation=4]{f}
+    \graphic[orientation=3]{f}
+
+    \caption{1}
+    \caption{2}
+    \caption{4}
+    \caption{3}
+  }
+
+  \template[margin=0mm]{four}{
+    \graphic[orientation=1,scale=1.2]{f}
+    \graphic[orientation=2,scale=1.2]{f}
+    \graphic[orientation=4,scale=1.2]{f}
+    \graphic[orientation=3,scale=1.2]{f}
+
+    \caption{1}
+    \caption{2}
+    \caption{4}
+    \caption{3}
+  }
+
+  \template[margin=0mm]{four}{
+    \graphic[orientation=7,scale=1.2]{f}
+    \graphic[orientation=6,scale=1.2]{f}
+    \graphic[orientation=8,scale=1.2]{f}
+    \graphic[orientation=5,scale=1.2]{f}
+
+    \caption{7}
+    \caption{6}
+    \caption{8}
+    \caption{5}
+  }
+
+  \testcase
+
+  \optimize[density=36,unsharp=0x0]
+  \pageheight=148mm
+
+  \testcase
+
+  \pagewidth=148mm
+  \pageheight=105mm
+
+  \testcase
+
+\end{document}

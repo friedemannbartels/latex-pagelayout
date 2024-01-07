@@ -868,13 +868,16 @@
 % graphic
 \newif\ifpal@isvisible
 \newif\ifpal@calculatecrop
+\newif\ifpal@trimnext
+\newif\ifpal@hflip
+\newif\ifpal@vflip
 \newdimen\pal@originalgraphicwidth\newdimen\pal@originalgraphicheight
 \newdimen\pal@cropx\newdimen\pal@cropy
 \newdimen\pal@cropleft\newdimen\pal@cropright
 \newdimen\pal@cropbottom\newdimen\pal@croptop
 \newdimen\pal@cropstart\newdimen\pal@cropend
 \newdimen\pal@snapleft\newdimen\pal@snapright
-\newdimen\pal@snapbottom\newdimen\pal@snaptop
+\newdimen\pal@snapbottom\newdimen\pal@snaptop\newdimen\pal@dimentmp
 \newdimen\pal@viewportwidth\newdimen\pal@viewportheight
 \newdimen\pal@frameborderwidth
 \newdimen\pal@frameborderradius
@@ -1000,6 +1003,7 @@
   /graphic,
   file/.store in=\pal@graphicoptionfile,
   scale/.store in=\pal@graphicoptionscale,
+  orientation/.store in=\pal@graphicoptionorientation,
   vpos/.store in=\pal@graphicoptionvpos,
   hpos/.store in=\pal@graphicoptionhpos,
   unsharp/.store in=\pal@graphicoptionunsharp,
@@ -1259,15 +1263,30 @@
 \def\newgraphic#1#2{
   \expandafter\newcommand\csname pal@graphic@#1\endcsname[2][0]{%
     \ifnum##1=0
-      \pgfkeys{pagegraphic,file={#1},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2,##2}
+      \pgfkeys{pagegraphic,file={#1},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2,##2}
     \else
       \ifnum##1=1
-        \pgfkeys{backcoverpagegraphic,file={#1},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2}
+        \pgfkeys{backcoverpagegraphic,file={#1},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2}
       \else
-        \pgfkeys{graphic,file={#1},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2,##2}
+        \pgfkeys{graphic,file={#1},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#2,##2}
       \fi
     \fi
   }%
+}
+\def\togglesnapv{
+  \pal@dimentmp=\pal@snaptop
+  \pal@snaptop=\pal@snapbottom
+  \pal@snapbottom=\pal@dimentmp
+}
+\def\togglesnaph{
+  \pal@dimentmp=\pal@snapleft
+  \pal@snapleft=\pal@snapright
+  \pal@snapright=\pal@dimentmp
+}
+\def\togglepos{
+  \xdef\pal@tmp{\pal@graphicoptionhpos}
+  \xdef\pal@graphicoptionhpos{\pal@graphicoptionvpos}
+  \xdef\pal@graphicoptionvpos{\pal@tmp}
 }
 \newcommand\pal@putgraphic[6][]{
   \pal@x=\posx{1}{#2}{1}{#3}
@@ -1298,13 +1317,90 @@
     \pal@snapbleedbottom=\pal@null
 
     \begingroup
-    \xdef\pal@filename{#6-\pal@density-\pal@graphicoptionscale-\pal@graphicoptionhpos-\pal@graphicoptionvpos-\the\numexpr\pal@snaptop\relax-\the\numexpr\pal@snapright\relax-\the\numexpr\pal@snapbottom\relax-\the\numexpr\pal@snapleft\relax-\the\numexpr\width\relax-\the\numexpr\height\relax-\pal@downsamplethreshold-\pal@graphicoptionunsharp-\pal@quality}
+    \pal@hflipfalse
+    \pal@vflipfalse
+
+    \ifnum\pal@graphicoptionorientation=1
+      \def\pal@angle{0}
+      \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
+      \edef\pal@graphicoptionvpos{\pgfmathresult}
+    \else
+      \ifnum\pal@graphicoptionorientation=2
+        \def\pal@angle{0}
+        \pal@hfliptrue
+        \togglesnaph
+        \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
+        \edef\pal@graphicoptionvpos{\pgfmathresult}
+        \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
+        \edef\pal@graphicoptionhpos{\pgfmathresult}
+      \else
+        \ifnum\pal@graphicoptionorientation=3
+          \def\pal@angle{180}
+          \togglesnaph
+          \togglesnapv
+          \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
+          \edef\pal@graphicoptionhpos{\pgfmathresult}
+        \else
+          \ifnum\pal@graphicoptionorientation=4
+            \def\pal@angle{180}
+            \pal@hfliptrue
+            \togglesnapv
+          \else
+            \ifnum\pal@graphicoptionorientation=5
+              \def\pal@angle{270}
+              \pal@vfliptrue
+              \togglesnaph
+              \togglepos
+              \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
+              \edef\pal@graphicoptionvpos{\pgfmathresult}
+              \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
+              \edef\pal@graphicoptionhpos{\pgfmathresult}
+            \else
+              \ifnum\pal@graphicoptionorientation=6
+                \def\pal@angle{270}
+                \togglesnapv
+                \togglesnaph
+                \togglepos
+                \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
+                \edef\pal@graphicoptionhpos{\pgfmathresult}
+              \else
+                \def\pal@angle{90}
+                \ifnum\pal@graphicoptionorientation=7
+                  \pal@vfliptrue
+                  \togglesnapv
+                  \togglepos
+                \else
+                  \togglepos
+                  \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
+                  \edef\pal@graphicoptionvpos{\pgfmathresult}
+                \fi
+              \fi
+            \fi
+          \fi
+        \fi
+      \fi
+    \fi
+
+    \ifnum\pal@graphicoptionorientation<5
+      \xdef\pal@filename{#6-\pal@density-\pal@graphicoptionscale-\pal@graphicoptionhpos-\pal@graphicoptionvpos-\the\numexpr\pal@snaptop\relax-\the\numexpr\pal@snapright\relax-\the\numexpr\pal@snapbottom\relax-\the\numexpr\pal@snapleft\relax-\the\numexpr\width\relax-\the\numexpr\height\relax-\pal@downsamplethreshold-\pal@graphicoptionunsharp-\pal@quality}
+    \else
+      \xdef\pal@filename{#6-\pal@density-\pal@graphicoptionscale-\pal@graphicoptionhpos-\pal@graphicoptionvpos-\the\numexpr\pal@snapleft\relax-\the\numexpr\pal@snaptop\relax-\the\numexpr\pal@snapright\relax-\the\numexpr\pal@snapbottom\relax-\the\numexpr\height\relax-\the\numexpr\width\relax-\pal@downsamplethreshold-\pal@graphicoptionunsharp-\pal@quality}
+    \fi
+
     \ifpal@optimize
       \IfFileExists{./cache/\pal@filename/g.jpg}{
-        \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g.jpg}}
+        \ifnum\pal@graphicoptionorientation<5
+          \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+        \else
+          \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+        \fi
       }{
         \IfFileExists{./cache/\pal@filename/g.png}{
-          \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g.png}}
+          \ifnum\pal@graphicoptionorientation<5
+            \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+          \else
+            \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+          \fi
         }{
           \pal@calculatecroptrue
         }
@@ -1332,10 +1428,13 @@
     \pal@disablegraphicsfilecheck
     \ifpal@calculatecrop
       % graphic crop
-      \settowidth{\pal@originalgraphicwidth}{\includegraphics{\pal@currfilebase\pal@currfileext}}
-      \settoheight{\pal@originalgraphicheight}{\includegraphics{\pal@currfilebase\pal@currfileext}}
-      \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
-      \edef\pal@graphicoptionvpos{\pgfmathresult}
+      \ifnum\pal@graphicoptionorientation<5
+        \settowidth{\pal@originalgraphicwidth}{\includegraphics{\pal@currfilebase\pal@currfileext}}
+        \settoheight{\pal@originalgraphicheight}{\includegraphics{\pal@currfilebase\pal@currfileext}}
+      \else
+        \settoheight{\pal@originalgraphicwidth}{\includegraphics{\pal@currfilebase\pal@currfileext}}
+        \settowidth{\pal@originalgraphicheight}{\includegraphics{\pal@currfilebase\pal@currfileext}}
+      \fi
       \pgfmathqparse{\pal@originalgraphicwidth/\pal@originalgraphicheight}
       \edef\pal@graphicratio{\pgfmathresult}
       \pgfmathqparse{\width/\height}
@@ -1408,6 +1507,7 @@
       \pal@snapoptimizedgraphic
     \fi
 
+    \pal@trimnextfalse
     \ifdefined\pal@nextincludegraphic
     \else
       \ifpal@optimize
@@ -1418,19 +1518,31 @@
           \isoptimizable{\pal@currfileext}{\pal@optimizegraphic{\pal@currfilebase}{\pal@currfileext}}
           \ifdefined\pal@optimizedext
             \IfFileExists{./cache/\pal@filename/g\pal@optimizedext}{
-              \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g\pal@optimizedext}}
+              \ifnum\pal@graphicoptionorientation<5
+                \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+              \else
+                \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+              \fi
             }{
               \ifx\pal@processresult\pal@ok
                 \ClassError{pagelayout}{Unexpected error. File not optimized}{File `cache/#6/g\pal@optimizedext' not found.\MessageBreak Try to delete the `cache' directory.\MessageBreak\MessageBreak\@ehc}
               \fi
-              \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width]{\pal@currfilebase\pal@currfileext}}
+              \pal@trimnexttrue
             }
           \else
-            \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width]{\pal@currfilebase\pal@currfileext}}
+            \pal@trimnexttrue
           \fi
         \fi
       \else
-        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width]{\pal@currfilebase\pal@currfileext}}
+        \pal@trimnexttrue
+      \fi
+    \fi
+
+    \ifpal@trimnext
+      \ifnum\pal@graphicoptionorientation<5
+        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
+      \else
+        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropbottom} {\pal@cropright} {\pal@croptop} {\pal@cropleft},\pal@clip,height=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
       \fi
     \fi
 
@@ -1475,7 +1587,11 @@
           \ifdim\pal@defaultborderradius>0pt
             \pal@ismaskrequiredtrue
           \else
-            \pal@ismaskrequiredfalse
+            \ifnum\pal@graphicoptionorientation=1
+              \pal@ismaskrequiredfalse
+            \else
+              \pal@ismaskrequiredtrue
+            \fi
           \fi
         \fi
       \else
@@ -1498,7 +1614,7 @@
           \fi
 
           \draw[draw opacity=0,rounded corners=\pal@defaultborderradius,path picture={
-            \node at (0.5\width,0.5\height){
+            \node[xscale=\ifpal@hflip-1\else1\fi,yscale=\ifpal@vflip-1\else1\fi] at (0.5\width,0.5\height){
               \pal@nextincludegraphic
             };
           }] (0,0) rectangle ++(\width,\height);%
@@ -1580,6 +1696,7 @@
   /pagegraphic,
   file/.store in=\pal@pagegraphic,
   scale/.store in=\pal@pagegraphicoptionscale,
+  orientation/.store in=\pal@pagegraphicoptionorientation,
   vpos/.store in=\pal@pagegraphicoptionvpos,
   hpos/.store in=\pal@pagegraphicoptionhpos,
   unsharp/.store in=\pal@pagegraphicoptionunsharp,
@@ -1589,6 +1706,7 @@
   /backcoverpagegraphic,
   file/.store in=\pal@backcoveroptionpagegraphicfile,
   scale/.store in=\pal@backcoveroptionpagegraphicscale,
+  orientation/.store in=\pal@backcoveroptionpagegraphicorientation,
   vpos/.store in=\pal@backcoveroptionpagegraphicvpos,
   hpos/.store in=\pal@backcoveroptionpagegraphichpos,
   unsharp/.store in=\pal@backcoveroptionpagegraphicunsharp,
@@ -1601,7 +1719,7 @@
     \innermargin=\pal@null
     \outermargin=\pal@null
     \setgrid{{{1}}}
-    \pgfkeys{graphic,scale=\pal@pagegraphicoptionscale,hpos=\pal@pagegraphicoptionhpos,vpos=\pal@pagegraphicoptionvpos,unsharp=\pal@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0,shadow xshift=0pt,shadow yshift=0pt}
+    \pgfkeys{graphic,scale=\pal@pagegraphicoptionscale,orientation=\pal@pagegraphicoptionorientation,hpos=\pal@pagegraphicoptionhpos,vpos=\pal@pagegraphicoptionvpos,unsharp=\pal@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0,shadow xshift=0pt,shadow yshift=0pt}
     \pal@putgraphic{0}{0}{1}{1}{\pal@pagegraphic}
   \endgroup
 }
@@ -1609,7 +1727,7 @@
   \ifcsname pal@graphic@#2\endcsname%
     \csname pal@graphic@#2\endcsname{#1}
   \else%
-    \pgfkeys{pagegraphic,file={#2},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#1}
+    \pgfkeys{pagegraphic,file={#2},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#1}
   \fi
 }
 \def\nopagegraphic{\setpagegraphic{}}
@@ -2596,6 +2714,7 @@
   \global\let\pal@defaultshadowxshift\pal@defaultshadowxshift
   \global\let\pal@defaultshadowyshift\pal@defaultshadowyshift
   \global\let\pal@pagegraphicoptionscale\pal@pagegraphicoptionscale
+  \global\let\pal@pagegraphicoptionorientation\pal@pagegraphicoptionorientation
   \global\let\pal@pagegraphicoptionvpos\pal@pagegraphicoptionvpos
   \global\let\pal@pagegraphicoptionhpos\pal@pagegraphicoptionhpos
   \global\let\pal@pagegraphicoptionunsharp\pal@pagegraphicoptionunsharp
@@ -2782,6 +2901,7 @@
   \else
     \def\pal@pagegraphic{\pal@backcoveroptionpagegraphicfile}
     \def\pal@pagegraphicoptionscale{\pal@backcoveroptionpagegraphicscale}
+    \def\pal@pagegraphicoptionorientation{\pal@backcoveroptionpagegraphicorientation}
     \def\pal@pagegraphicoptionvpos{\pal@backcoveroptionpagegraphicvpos}
     \def\pal@pagegraphicoptionhpos{\pal@backcoveroptionpagegraphichpos}
     \def\pal@pagegraphicoptionunsharp{\pal@backcoveroptionpagegraphicunsharp}
@@ -2969,6 +3089,9 @@
       \let\pal@backcoveroptionpagegraphicfile\pal@pagegraphic
       \ifdefined\pal@pagegraphicoptionscale
         \let\pal@backcoveroptionpagegraphicscale\pal@pagegraphicoptionscale
+      \fi
+      \ifdefined\pal@pagegraphicoptionorientation
+        \let\pal@backcoveroptionpagegraphicorientation\pal@pagegraphicoptionorientation
       \fi
       \ifdefined\pal@pagegraphicoptionhpos
         \let\pal@backcoveroptionpagegraphichpos\pal@pagegraphicoptionhpos
@@ -3299,7 +3422,7 @@
   \ifnum\pal@contentcounter=\pal@placeholdercounter
     \def\pal@currentplaceholdertype{graphic}
     \def\pal@currentplaceholderoptions{}
-    \pgfkeys{graphic,file={#2},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#1}
+    \pgfkeys{graphic,file={#2},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,#1}
     \ifcsname pal@graphic@#2\endcsname%
       \csname pal@graphic@#2\endcsname[2]{#1}%
     \fi
@@ -3402,7 +3525,7 @@
             \csname pal@graphic@##2\endcsname[2]{##1}
           \else
             \ifpal@template\else
-              \pgfkeys{graphic,file={##2},scale=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,##1}
+              \pgfkeys{graphic,file={##2},scale=1,orientation=1,vpos=0.5,hpos=0.5,unsharp=\pal@unsharp,##1}
             \fi
           \fi
         \fi
@@ -3646,9 +3769,17 @@
         \pal@errmsg@magicknotinstalled{Ppi not calculated}
       \else
         \ifdim\pal@originalgraphicwidth<\pal@originalgraphicheight
-          \pgfmathqparse{(\pal@originalgraphicwidth - \pal@cropleft - \pal@cropright) / \pal@originalgraphicwidth * \pal@graphicsize pt / \the\width * 72.27pt}
+          \ifnum\pal@graphicoptionorientation<5
+            \pgfmathqparse{(\pal@originalgraphicwidth - \pal@cropleft - \pal@cropright) / \pal@originalgraphicwidth * \pal@graphicsize pt / \the\width * 72.27pt}
+          \else
+            \pgfmathqparse{(\pal@originalgraphicheight - \pal@croptop - \pal@cropbottom) / \pal@originalgraphicheight * \pal@graphicsize pt / \the\height * 72.27pt}
+          \fi
         \else
-          \pgfmathqparse{(\pal@originalgraphicheight - \pal@croptop - \pal@cropbottom) / \pal@originalgraphicheight * \pal@graphicsize pt / \the\height * 72.27pt}
+          \ifnum\pal@graphicoptionorientation<5
+            \pgfmathqparse{(\pal@originalgraphicheight - \pal@croptop - \pal@cropbottom) / \pal@originalgraphicheight * \pal@graphicsize pt / \the\height * 72.27pt}
+          \else
+            \pgfmathqparse{(\pal@originalgraphicwidth - \pal@cropleft - \pal@cropright) / \pal@originalgraphicwidth * \pal@graphicsize pt / \the\width * 72.27pt}
+          \fi
         \fi
 
         \pgfmathint{\pgfmathresult}
@@ -3659,7 +3790,11 @@
   \immediate\closein\pal@scriptresult
 }
 \newcommand\pal@optimizegraphic[2]{
-  \immediate\openin\pal@scriptresult={|pagelayoutapi optimize\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@density\%\the\numexpr\width\%\the\numexpr\height\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \ifnum\pal@graphicoptionorientation<5
+    \immediate\openin\pal@scriptresult={|pagelayoutapi optimize\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@density\%\the\numexpr\width\%\the\numexpr\height\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \else
+    \immediate\openin\pal@scriptresult={|pagelayoutapi optimize\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@density\%\the\numexpr\height\%\the\numexpr\width\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \fi
   \ifeof\pal@scriptresult
     \pal@errmsg@shellaccessforbidden{File not optimized}
   \else
@@ -3724,7 +3859,11 @@
   \immediate\closein\pal@scriptresult
 }
 \newcommand\pal@addtobatchlist[2]{
-  \global\edef\pal@batchlist{\pal@batchlist\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@density\%\the\numexpr\width\%\the\numexpr\height\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \ifnum\pal@graphicoptionorientation<5
+    \global\edef\pal@batchlist{\pal@batchlist\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@density\%\the\numexpr\width\%\the\numexpr\height\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \else
+    \global\edef\pal@batchlist{\pal@batchlist\% "#1#2" \% "\pal@filename" \%\pal@optimizedext\%\the\numexpr\pal@originalgraphicheight\%\the\numexpr\pal@originalgraphicwidth\%\the\numexpr\pal@cropbottom\%\the\numexpr\pal@croptop\%\the\numexpr\pal@cropleft\%\the\numexpr\pal@cropright\%\the\numexpr\pal@density\%\the\numexpr\height\%\the\numexpr\width\%\pal@downsamplethreshold\%\pal@graphicoptionunsharp\%\pal@quality}
+  \fi
 }
 \newcommand\pal@batchoptimize{
   \immediate\openin\pal@scriptresult={|pagelayoutapi batchoptimize\pal@batchlist}
