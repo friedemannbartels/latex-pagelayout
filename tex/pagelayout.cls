@@ -1389,17 +1389,25 @@
 
     \ifpal@optimize
       \IfFileExists{./cache/\pal@filename/g.jpg}{
-        \ifnum\pal@graphicoptionorientation<5
-          \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+        \ifnum\pal@graphicoptionorientation<3
+          \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g.jpg}}
         \else
-          \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+          \ifnum\pal@graphicoptionorientation<5
+            \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+          \else
+            \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.jpg}}
+          \fi
         \fi
       }{
         \IfFileExists{./cache/\pal@filename/g.png}{
-          \ifnum\pal@graphicoptionorientation<5
-            \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+          \ifnum\pal@graphicoptionorientation<3
+            \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g.png}}
           \else
-            \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+            \ifnum\pal@graphicoptionorientation<5
+              \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+            \else
+              \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g.png}}
+            \fi
           \fi
         }{
           \pal@calculatecroptrue
@@ -1518,10 +1526,14 @@
           \isoptimizable{\pal@currfileext}{\pal@optimizegraphic{\pal@currfilebase}{\pal@currfileext}}
           \ifdefined\pal@optimizedext
             \IfFileExists{./cache/\pal@filename/g\pal@optimizedext}{
-              \ifnum\pal@graphicoptionorientation<5
-                \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+              \ifnum\pal@graphicoptionorientation<3
+                \def\pal@nextincludegraphic{\includegraphics[width=\width]{cache/\pal@filename/g\pal@optimizedext}}
               \else
-                \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+                \ifnum\pal@graphicoptionorientation<5
+                  \def\pal@nextincludegraphic{\includegraphics[width=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+                \else
+                  \def\pal@nextincludegraphic{\includegraphics[height=\width,angle=\pal@angle]{cache/\pal@filename/g\pal@optimizedext}}
+                \fi
               \fi
             }{
               \ifx\pal@processresult\pal@ok
@@ -1539,10 +1551,14 @@
     \fi
 
     \ifpal@trimnext
-      \ifnum\pal@graphicoptionorientation<5
-        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
+      \ifnum\pal@graphicoptionorientation<3
+        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width]{\pal@currfilebase\pal@currfileext}}
       \else
-        \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropbottom} {\pal@cropright} {\pal@croptop} {\pal@cropleft},\pal@clip,height=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
+        \ifnum\pal@graphicoptionorientation<5
+          \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropleft} {\pal@cropbottom} {\pal@cropright} {\pal@croptop},\pal@clip,width=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
+        \else
+          \def\pal@nextincludegraphic{\includegraphics[trim={\pal@cropbottom} {\pal@cropright} {\pal@croptop} {\pal@cropleft},\pal@clip,height=\width,angle=\pal@angle]{\pal@currfilebase\pal@currfileext}}
+        \fi
       \fi
     \fi
 
@@ -1614,9 +1630,27 @@
           \fi
 
           \draw[draw opacity=0,rounded corners=\pal@defaultborderradius,path picture={
-            \node[xscale=\ifpal@hflip-1\else1\fi,yscale=\ifpal@vflip-1\else1\fi] at (0.5\width,0.5\height){
-              \pal@nextincludegraphic
-            };
+            \ifpal@hflip
+              \ifpal@vflip
+                \node[xscale=-1,yscale=-1] at (0.5\width,0.5\height){
+                  \pal@nextincludegraphic
+                };
+              \else
+                \node[xscale=-1] at (0.5\width,0.5\height){
+                  \pal@nextincludegraphic
+                };
+              \fi
+            \else
+              \ifpal@vflip
+                \node[yscale=-1] at (0.5\width,0.5\height){
+                  \pal@nextincludegraphic
+                };
+              \else
+                \node at (0.5\width,0.5\height){
+                  \pal@nextincludegraphic
+                };
+              \fi
+            \fi
           }] (0,0) rectangle ++(\width,\height);%
         \end{tikzpicture}%
       \else%

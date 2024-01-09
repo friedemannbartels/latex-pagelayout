@@ -13,10 +13,14 @@
 %%
 
 %%
-%% Benchmark 500 pages with Apple M1: 27.3s (draft: 21.3s, layouthelper: 41.1s)
+%% Benchmark 500 pages (average of the best 3 of at least 6 runs)
+%% Commit    Date        TeX Live  CPU             Draft   Layouthelper  Total
+%% 1.0                   2022      Apple M1  27.3s  21.3s  41.1s         89.7s
+%% 1.0.3     2024/01/09  2023                28.4s  22.1s  42.2s         92.7s
+%%           2024/01/09                      28.8s  22.6s  42.6s         94.0s
 %%
 
-\documentclass[gutter=10mm]{pagelayout}
+\documentclass[draft,gutter=10mm]{pagelayout}
 
 \nocuttingmarks
 % \safezone\grid\placeholders
@@ -41,8 +45,8 @@
   \placeholder{4 4 5 5}
 }
 
-\newcount\runs
-\runs=500
+\newcount\pages
+\pages=500
 
 \begin{document}
 
@@ -58,8 +62,8 @@
       \graphic{1x2}
       \graphic[scale=2]{1x1}
     }
-    \advance\runs by -1
-  \ifnum \runs>0
+    \advance\pages by -1
+  \ifnum \pages>0
   \repeat
 
 \end{document}
