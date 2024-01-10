@@ -871,6 +871,8 @@
 \newif\ifpal@trimnext
 \newif\ifpal@hflip
 \newif\ifpal@vflip
+\newif\ifpal@graphicoptionhflip
+\newif\ifpal@graphicoptionvflip
 \newdimen\pal@originalgraphicwidth\newdimen\pal@originalgraphicheight
 \newdimen\pal@cropx\newdimen\pal@cropy
 \newdimen\pal@cropleft\newdimen\pal@cropright
@@ -1004,6 +1006,8 @@
   file/.store in=\pal@graphicoptionfile,
   scale/.store in=\pal@graphicoptionscale,
   orientation/.store in=\pal@graphicoptionorientation,
+  hflip/.is if=pal@graphicoptionhflip,
+  vflip/.is if=pal@graphicoptionvflip,
   vpos/.store in=\pal@graphicoptionvpos,
   hpos/.store in=\pal@graphicoptionhpos,
   unsharp/.store in=\pal@graphicoptionunsharp,
@@ -1322,13 +1326,28 @@
 
     \ifnum\pal@graphicoptionorientation=1
       \def\pal@angle{0}
+      \ifpal@graphicoptionhflip
+        \pal@hfliptrue
+        \togglesnaph
+      \fi
+      \ifpal@graphicoptionvflip
+        \pal@vfliptrue
+        \togglesnapv
+      \fi
       \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
       \edef\pal@graphicoptionvpos{\pgfmathresult}
     \else
       \ifnum\pal@graphicoptionorientation=2
         \def\pal@angle{0}
-        \pal@hfliptrue
-        \togglesnaph
+        \ifpal@graphicoptionhflip
+        \else
+          \pal@hfliptrue
+          \togglesnaph
+        \fi
+        \ifpal@graphicoptionvflip
+          \pal@vfliptrue
+          \togglesnapv
+        \fi
         \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
         \edef\pal@graphicoptionvpos{\pgfmathresult}
         \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
@@ -1336,20 +1355,44 @@
       \else
         \ifnum\pal@graphicoptionorientation=3
           \def\pal@angle{180}
-          \togglesnaph
-          \togglesnapv
+          \ifpal@graphicoptionhflip
+            \pal@hfliptrue
+          \else
+            \togglesnaph
+          \fi
+          \ifpal@graphicoptionvflip
+            \pal@vfliptrue
+          \else
+            \togglesnapv
+          \fi
           \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
           \edef\pal@graphicoptionhpos{\pgfmathresult}
         \else
           \ifnum\pal@graphicoptionorientation=4
             \def\pal@angle{180}
-            \pal@hfliptrue
-            \togglesnapv
+            \ifpal@graphicoptionhflip
+              \togglesnaph
+            \else
+              \pal@hfliptrue
+            \fi
+            \ifpal@graphicoptionvflip
+              \pal@vfliptrue
+            \else
+              \togglesnapv
+            \fi
           \else
             \ifnum\pal@graphicoptionorientation=5
               \def\pal@angle{270}
-              \pal@vfliptrue
-              \togglesnaph
+              \ifpal@graphicoptionhflip
+                \pal@hfliptrue
+              \else
+                \togglesnaph
+              \fi
+              \ifpal@graphicoptionvflip
+                \togglesnapv
+              \else
+                \pal@vfliptrue
+              \fi
               \togglepos
               \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
               \edef\pal@graphicoptionvpos{\pgfmathresult}
@@ -1358,18 +1401,37 @@
             \else
               \ifnum\pal@graphicoptionorientation=6
                 \def\pal@angle{270}
-                \togglesnapv
-                \togglesnaph
+                \ifpal@graphicoptionhflip
+                  \pal@hfliptrue
+                \else
+                  \togglesnaph
+                \fi
+                \ifpal@graphicoptionvflip
+                  \pal@vfliptrue
+                \else
+                  \togglesnapv
+                \fi
                 \togglepos
                 \pgfmathqparse{1pt-\pal@graphicoptionhpos pt}
                 \edef\pal@graphicoptionhpos{\pgfmathresult}
               \else
                 \def\pal@angle{90}
+                \ifpal@graphicoptionhflip
+                  \pal@hfliptrue
+                  \togglesnaph
+                \fi
                 \ifnum\pal@graphicoptionorientation=7
-                  \pal@vfliptrue
-                  \togglesnapv
+                  \ifpal@graphicoptionvflip
+                  \else
+                    \pal@vfliptrue
+                    \togglesnapv
+                  \fi
                   \togglepos
                 \else
+                  \ifpal@graphicoptionvflip
+                    \pal@vfliptrue
+                    \togglesnapv
+                  \fi
                   \togglepos
                   \pgfmathqparse{1pt-\pal@graphicoptionvpos pt}
                   \edef\pal@graphicoptionvpos{\pgfmathresult}
@@ -1724,6 +1786,10 @@
 }
 
 % pagegraphic
+\newif\ifpal@pagegraphicoptionhflip
+\newif\ifpal@pagegraphicoptionvflip
+\newif\ifpal@backcoveroptionpagegraphichflip
+\newif\ifpal@backcoveroptionpagegraphicvflip
 \def\pal@pagegraphic{}
 \pgfkeys{
   /pagegraphic/.is family,
@@ -1731,6 +1797,8 @@
   file/.store in=\pal@pagegraphic,
   scale/.store in=\pal@pagegraphicoptionscale,
   orientation/.store in=\pal@pagegraphicoptionorientation,
+  hflip/.is if=pal@pagegraphicoptionhflip,
+  vflip/.is if=pal@pagegraphicoptionvflip,
   vpos/.store in=\pal@pagegraphicoptionvpos,
   hpos/.store in=\pal@pagegraphicoptionhpos,
   unsharp/.store in=\pal@pagegraphicoptionunsharp,
@@ -1741,6 +1809,8 @@
   file/.store in=\pal@backcoveroptionpagegraphicfile,
   scale/.store in=\pal@backcoveroptionpagegraphicscale,
   orientation/.store in=\pal@backcoveroptionpagegraphicorientation,
+  hflip/.is if=pal@backcoveroptionpagegraphichflip,
+  vflip/.is if=pal@backcoveroptionpagegraphicvflip,
   vpos/.store in=\pal@backcoveroptionpagegraphicvpos,
   hpos/.store in=\pal@backcoveroptionpagegraphichpos,
   unsharp/.store in=\pal@backcoveroptionpagegraphicunsharp,
@@ -1753,7 +1823,7 @@
     \innermargin=\pal@null
     \outermargin=\pal@null
     \setgrid{{{1}}}
-    \pgfkeys{graphic,scale=\pal@pagegraphicoptionscale,orientation=\pal@pagegraphicoptionorientation,hpos=\pal@pagegraphicoptionhpos,vpos=\pal@pagegraphicoptionvpos,unsharp=\pal@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0,shadow xshift=0pt,shadow yshift=0pt}
+    \pgfkeys{graphic,scale=\pal@pagegraphicoptionscale,orientation=\pal@pagegraphicoptionorientation,hflip=\ifpal@pagegraphicoptionhflip true\else false\fi,vflip=\ifpal@pagegraphicoptionvflip true\else false\fi,hpos=\pal@pagegraphicoptionhpos,vpos=\pal@pagegraphicoptionvpos,unsharp=\pal@pagegraphicoptionunsharp,border width=0pt,border radius=0pt,shadow size=0,shadow xshift=0pt,shadow yshift=0pt}
     \pal@putgraphic{0}{0}{1}{1}{\pal@pagegraphic}
   \endgroup
 }
@@ -2937,6 +3007,16 @@
     \def\pal@pagegraphic{\pal@backcoveroptionpagegraphicfile}
     \def\pal@pagegraphicoptionscale{\pal@backcoveroptionpagegraphicscale}
     \def\pal@pagegraphicoptionorientation{\pal@backcoveroptionpagegraphicorientation}
+    \ifpal@backcoveroptionpagegraphichflip
+      \pal@pagegraphicoptionhfliptrue
+    \else
+      \pal@pagegraphicoptionhflipfalse
+    \fi
+    \ifpal@backcoveroptionpagegraphicvflip
+      \pal@pagegraphicoptionvfliptrue
+    \else
+      \pal@pagegraphicoptionvflipfalse
+    \fi
     \def\pal@pagegraphicoptionvpos{\pal@backcoveroptionpagegraphicvpos}
     \def\pal@pagegraphicoptionhpos{\pal@backcoveroptionpagegraphichpos}
     \def\pal@pagegraphicoptionunsharp{\pal@backcoveroptionpagegraphicunsharp}
