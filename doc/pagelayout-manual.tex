@@ -379,6 +379,8 @@ Add the option |breakable| to break text over multiple boxes and pages.
 \DescribeMacro{\usetext}
 Use the macro |\usetext|\oarg{name} to place the following text boxes in the grid.
 If you want to use multiple breakable text boxes you can initialize the text with the |name| option and define a name that you then can pass to the |\usetext| option.
+Breakable text boxes may have different heights and positions.
+To align the baselines use the |baselinesnap| option and set the baseline dimension, for example |baselinesnap=\baselineskip|.
 \par
 The |\text| macro accepts the options |shadow|, |shadow size|, |shadow color|, |shadow opacity|, |shadow xshift|, |shadow yshift|, |border|, |border width|,\break |border color| and |border radius|.
 Read more about shadows and borders in section~\ref{subsec:borders}.
@@ -399,6 +401,8 @@ If no graphic version with the given name exists, the macro uses the name as the
 The graphic is scaled to fit in the content box.
 If the aspect ratio of the graphic differs from that of the defined content box, the graphic is cropped.
 You can change the cropping by defining relative decimal values for the options |scale| (>1), |hpos| and |vpos| (0-1).
+With the |orientation| option you can set the Exif orientation flag (1-8).
+To flip a graphic horizontally or vertically use the options |hflip| or |vflip|.
 Same as the |\text| macro, the |\graphic| macro accepts the |border| and |shadow| options described in section~\ref{subsec:borders}.
 
 \DescribeMacro{\graphicspath}
