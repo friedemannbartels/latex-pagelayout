@@ -3,7 +3,7 @@
 %%
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either
-%% version 1.3c of this license or (at your option) any later
+%% version 1.3c of this license or (at your argument) any later
 %% version.  The latest version of this license is in:
 %%
 %%    http://www.latex-project.org/lppl.txt
@@ -43,15 +43,15 @@ In 2020, I started to develop my own solution.
 What started with some SVG templates and shell scripts ended up in the pagelayout class, a declarative desktop publishing approach.
 \par
 With the pagelayout class you can create single- and double-sided documents, create pages with margins, safety margins, and bleed, use templates, align text and graphics in a grid, wrap text across multiple pages and use before pages.
-Generic templates, automatic grid layout and a simple and consistent user interface make it easier than ever to create graphics-rich documents with \LaTeX.
+Automatic grid layout and a simple and consistent user interface make it easier than ever to create graphics-rich documents with \LaTeX.
 Under the hood the TikZ and tcolorbox packages, ImageMagick and Inkscape are used.
 
 \section{Document}\label{sec:document}
 
-The document options described in the following can be either set as a document option (|\documentclass[twoside]{pagelayout}|) or with a macro (|\twoside|) in the preamble.
+The document arguments described in the following can be either set as a document argument (|\documentclass[twoside]{pagelayout}|) or with a command (|\twoside|) in the preamble.
 
 \DescribeMacro {\documentclass}
-Use the class with the |\documentclass|\oarg{options}|{pagelayout}| macro.
+Use the class with the |\documentclass|\oarg{arguments}|{pagelayout}| command.
 A single sided document is the default.
 \begin{figure}[h!]
 \begin{tikzpicture}
@@ -65,7 +65,7 @@ A single sided document is the default.
 \end{figure}
 
 \DescribeMacro {\twoside}
-Using the document option |twoside| results in a document with left and right pages.
+Using the document argument |twoside| results in a document with left and right pages.
 When you create a two-sided document, your document always has an even number of pages.
 If you create a document with an odd number of pages, an additional page is automatically inserted.
 Two-sided documents start with a right page by default.
@@ -83,7 +83,7 @@ Two-sided documents start with a right page by default.
 \end{figure}
 
 \DescribeMacro {\beginleft}
-Use the option |beginleft| to begin with a left page.
+Use the argument |beginleft| to begin with a left page.
 \begin{figure}[h!]
 \begin{tikzpicture}
   \draw[black, thin] (0,0) rectangle (1,1);
@@ -99,7 +99,7 @@ Use the option |beginleft| to begin with a left page.
 
 By default, each page is placed on one paper.
 \DescribeMacro {\fanfold}
-With the |fanfold| option you can change this behavior so that a left and a right page are placed on one paper.
+With the |fanfold| argument you can change this behavior so that a left and a right page are placed on one paper.
 In this case, the first page is a left one by default.
 \begin{figure}[h!]
 \begin{tikzpicture}
@@ -113,7 +113,7 @@ In this case, the first page is a left one by default.
 \end{figure}
 
 \DescribeMacro {\cover}
-The |cover| option is similar to the |fanfold| option, but only applied to cover pages.
+The |cover| argument is similar to the |fanfold| argument, but only applied to cover pages.
 Read more about cover pages in section~\ref{sec:pages}.
 \begin{figure}[h!]
 \begin{tikzpicture}
@@ -126,7 +126,7 @@ Read more about cover pages in section~\ref{sec:pages}.
 \end{figure}
 
 \DescribeMacro {\beginright}
-If you want your fanfold document to start with a right hand page, you can use the option |beginright|.
+If you want your fanfold document to start with a right hand page, you can use the argument |beginright|.
 \begin{figure}[h!]
 \begin{tikzpicture}
   \draw[black, thin] (0,0) rectangle (1,1);
@@ -147,7 +147,7 @@ If you want your fanfold document to start with a right hand page, you can use t
 
 \subsection{Lengths}\label{subsec:size}
 
-The document lengths described below can be set either as a document option (|\documentclass[page width=21cm]{pagelayout}|) or by assigning the dimension directly (|\pagewidth=21cm|) in the preamble or in the document.
+The document lengths described below can be set either as a document argument (|\documentclass[page width=21cm]{pagelayout}|) or by assigning the dimension directly (|\pagewidth=21cm|) in the preamble or in the document.
 
 \DescribeMacro {\pagewidth}
 \DescribeMacro {\pageheight}
@@ -163,7 +163,7 @@ The paper size results from the page size and the bleed.
 
 \DescribeMacro {\safetymargin}
 The |safety margin| is the only length that has no influence on the final result.
-Its only purpose is to control the safe zone during editing.
+Its only purpose is to control the safe zone when editing.
 It is |0mm| by default and can be configured for each edge by defining |top safety margin|, |inner safety margin|, |bottom safety margin| and |outer safety margin|.
 
 \DescribeMacro {\margin}
@@ -178,7 +178,7 @@ You can create documents with cover pages.
 Read more about creating cover pages in section~\ref{sec:pages}.
 You can set the lengths |coverwidth| and |coverheight|.
 By default, the cover pages are the same size as the inside pages.
-If you want to create a cover with a spine, use the |fanfold| or |cover| option described in section~\ref{sec:document}.
+If you want to create a cover with a spine, use the |fanfold| or |cover| argument described in section~\ref{sec:document}.
 In this case the length |spinewidth| takes effect.
 The default spine width is |3mm|.
 \par
@@ -188,26 +188,26 @@ For example, define |cover inner bleed| or |cover safety margin|.
 
 \subsection{Page Graphics and Colors}\label{subsec:colors}
 
-You can define a page graphic and a page color with the options |page graphic| and |page color|.
-Set the option |color| to define the text color.
-These options can be defined for the document or for each page (see section~\ref{sec:pages}).
+You can define a page graphic and a page color with the arguments |page graphic| and |page color|.
+Set the argument |color| to define the text color.
+These arguments can be defined for the document or for each page (see section~\ref{sec:pages}).
 \par
-Read how to set the scale and crop of a page graphic with the |\newgraphic| macro in section~\ref{sec:content}.
+Read how to set the scale and crop of a page graphic with the |\newgraphic| command in section~\ref{sec:content}.
 
 \subsection{Layout Guides}
 
-The layout guides described in the following can be either set as a document option (|\documentclass[grid]{pagelayout}|) or using a macro (|\grid|) in the preamble or the document.
+The layout guides described in the following can be either set as a document argument (|\documentclass[grid]{pagelayout}|) or using a command (|\grid|) in the preamble or the document.
 Layout guides can be switched on (|\safezone|) or off (|\nosafezone|).
 
 \DescribeMacro {\grid}
-The |grid| option visualizes the margin and the grid gutters with green lines.
+The |grid| argument visualizes the margin and the grid gutters with green lines.
 Read more about the grid in section~\ref{sec:grid}.
 \DescribeMacro {\safezone}
 The |safezone| layout guide shows a red border for the bleed and a thin pink line to indicate the safety margin.
 \DescribeMacro {\cuttingmarks}
 As an alternative to |safezone|, you can also use |cutting marks| to display cutting marks.
 \DescribeMacro {\graphpaper}
-Show a graph paper with the |graph paper| option.
+Show a graph paper with the |graph paper| argument.
 
 \begin{figure}[h]
 \begin{tikzpicture}
@@ -228,59 +228,59 @@ Show a graph paper with the |graph paper| option.
 \end{figure}
 
 \DescribeMacro {\placeholders}
-The |placeholders| option shows template placeholders.
+The |placeholders| argument shows template placeholders.
 Read more about templates in section~\ref{sec:templates}.
 \DescribeMacro {\fillpages}
-If you create a document with a cover and a first right hand page, use the |fill pages| option during editing to add blank pages to get a better impression of the final result.
+If you create a document with a cover and a first right hand page, use the |fill pages| argument during editing to add blank pages to get a better impression of the final result.
 
 \subsection{Draft Mode}\label{subsec:draftmode}
 
-The |draft| option is a shortcut to enable the options |placeholders|, |cutting marks| and |fill pages|.
+The |draft| argument is a shortcut to enable the arguments |placeholders|, |cutting marks| and |fill pages|.
 It also speeds up rebuilding the PDF when changing the document.
 
 \section{Pages}\label{sec:pages}
 
 \DescribeMacro {\page}
-Create a page with the macro |\page|\oarg{options}\marg{content}.
-You can overwrite the document options |margin|, |top margin|, |bottom margin|, |inner margin|, |outer margin|, |gutter|, |page color|, |page graphic| and |color| for each page.
+Create a page with the command |\page|\oarg{arguments}\marg{content}.
+You can overwrite the document arguments |margin|, |top margin|, |bottom margin|, |inner margin|, |outer margin|, |gutter|, |page color|, |page graphic| and |color| for each page.
 
-Use the option |double| to create a double page.
+Use the argument |double| to create a double page.
 When creating a double page after a left page, a right page is automatically inserted before the double page.
-The option |double| is only recognized for double sided documents.
+The argument |double| is only recognized for double sided documents.
 \par
-Use the options |front cover| or |back cover| to create a front or back cover.
+Use the arguments |front cover| or |back cover| to create a front or back cover.
 If you have a back cover and a front cover, the back cover page must be defined first.
-If no option is active, the front cover is placed as the first page and the back cover as the last page of the document.
+If no argument is active, the front cover is placed as the first page and the back cover as the last page of the document.
 In this case, the only difference from normal pages is that the cover pages are not counted in the page numbering.
 \par
-If the option |fanfold| or |cover| is selected, the back and front covers are laid out on one paper so that the cover is suitable for a book with a hard or soft cover (see section~\ref{sec:document}).
+If the argument |fanfold| or |cover| is selected, the back and front covers are laid out on one paper so that the cover is suitable for a book with a hard or soft cover (see section~\ref{sec:document}).
 Space is reserved between the back and front covers for the spine.
-Set the |spine width| document option as described in section~\ref{subsec:size}.
+Set the |spine width| document argument as described in section~\ref{subsec:size}.
 \par
-With the options |hpos| and |vpos| you can set the default grid alignment for a page.
+With the arguments |hpos| and |vpos| you can set the default grid alignment for a page.
 Read more about the grid in the next section.
 
-\DescribeMacro {\setpagecolor}Alternativly to the option you can use the macro |\setpagecolor|\marg{color} to set the page color for all following pages.
+\DescribeMacro {\setpagecolor}Alternativly to the argument you can use the command |\setpagecolor|\marg{color} to set the page color for all following pages.
 
-\DescribeMacro {\setpagegraphic}With the macro |\setpagegraphic|\oarg{options}\marg{name} you can define a page graphic for all following pages.
-The name references a graphic version created with the |\newgraphic| macro (see section~\ref{sec:content}).
-If no graphic version with the given name exists, the macro uses the name as the file name.
-You can change the clipping by defining relative decimal values for the options |scale| (>1), |hpos| and |vpos| (0-1).
+\DescribeMacro {\setpagegraphic}With the command |\setpagegraphic|\oarg{arguments}\marg{name} you can define a page graphic for all following pages.
+The name references a graphic version created with the |\newgraphic| command (see section~\ref{sec:content}).
+If no graphic version with the given name exists, the command uses the name as the file name.
+You can change the clipping by defining relative decimal values for the arguments |scale| (>1), |hpos| and |vpos| (0-1).
 
-\DescribeMacro {\newbeforepage}With the macro |\newbeforepage|\marg{name}\marg{content} you can create a reusable page layer, that can be set before pages.
+\DescribeMacro {\newbeforepage}With the command |\newbeforepage|\marg{name}\marg{content} you can create a reusable page layer, that can be set before pages.
 \DescribeMacro {\setbeforepage}
-Use the macro |\setbeforepage|\marg{name} to define a before page for all following pages or use the page option |before page| to specify a before page for a individual page.
+Use the command |\setbeforepage|\marg{name} to define a before page for all following pages or use the page argument |before page| to specify a before page for a individual page.
 
 \DescribeMacro {\ifleftpage}
 \DescribeMacro {\ifrightpage}
 Use the condition |\ifleftpage|\marg{content} and |\ifrightpage|\marg{content} to check for the current page alignment.
 
 \DescribeMacro {\leftpage}
-Within a page scope you can use the |\leftpage|\marg{content} macro to place content only on a left page.
-In comparison to the |\ifleftpage|\marg{content} condition, the macro sets a grid for a single page.
+Within a page scope you can use the |\leftpage|\marg{content} command to place content only on a left page.
+In comparison to the |\ifleftpage|\marg{content} condition, the command sets a grid for a single page.
 That way you can combine single with double page layouts.
 \DescribeMacro {\rightpage}
-Accordingly you can use the |\rightpage|\marg{content} macro.
+Accordingly you can use the |\rightpage|\marg{content} command.
 
 \section{Grid}\label{sec:grid}
 
@@ -290,7 +290,7 @@ All definitions are relative.
 The size and position results from these relations and the configured dimensions page width, page height, margin and gutter.
 
 \DescribeMacro{\setgrid}
-Create a grid with the macro |\setgrid|\oarg{options}\marg{config}.
+Create a grid with the command |\setgrid|\oarg{arguments}\marg{config}.
 The grid configuration is a nested list of rows and cells.
 A cell is defined by a number that describes the width ratio to the other cells in the row.
 The default grid describes a row with one cell:
@@ -335,30 +335,30 @@ The cells in the second row share the available width in the ratio one to two:
 
 If the height of fixed and forced rows exceeds the available height, the grid shrinks to fit the available space.
 The defined aspect ratios of the cells are preserved and the grid is centered horizontally.
-In this case you can define the |hpos| option to align the grid horizontally.
+In this case you can define the |hpos| argument to align the grid horizontally.
 A value of |0| aligns the grid to the left, a value of |1| aligns the grid to the right.
 The default is a value of |0.5|.
 
 If the height of fixed and forced rows is less than the available height, all flexible rows share the excess height.
 If there are no flexible rows, the grid is centered vertically.
-In this case you can define the |vpos| option to align the grid vertically.
+In this case you can define the |vpos| argument to align the grid vertically.
 A value of |0| aligns the grid to the top, a value of |1| aligns the grid to the bottom.
 The default is a value of |0.5|.
 
-As for a document or a page you can set |margin| and |gutter| options for a specific grid.
-With the options |width|, |height|, |x| and |y| you can override the intrinsic grid size and position.
+As for a document or a page you can set |margin| and |gutter| arguments for a specific grid.
+With the arguments |width|, |height|, |x| and |y| you can override the intrinsic grid size and position.
 When overriding the grid size and position, you can calculate with the intrinsic values, for example |x=\x-1cm|.
 
 \subsection{Placing Content}
 
 The grid aligns content (see section~\ref{sec:content}) automatically in the given grid cells.
-To set the position of a content box manually use the macro |\place|\marg{fromrow fromcell torow tocell}.
+To set the position of a content box manually use the command |\place|\marg{fromrow fromcell torow tocell}.
 \DescribeMacro{\place}
-To place content in the first row and first cell use the macro |\place{0 0 1 1}| before the content.
+To place content in the first row and first cell use the command |\place{0 0 1 1}| before the content.
 The definded place applies only for the following content box.
 The next boxes are then again placed with auto layout.
 \par
-The macro accepts decimals.
+The command accepts decimals.
 That allows you to place content everywhere within the grid.
 The |gutter| is taken into account when calculating the positions.
 
@@ -367,84 +367,84 @@ The |gutter| is taken into account when calculating the positions.
 \subsection{Text}
 
 \DescribeMacro{\text}
-With the macro |\text|\oarg{options}\marg{text} you can place text.
-Align the text vertically with the |center| and |bottom| options.
+With the command |\text|\oarg{arguments}\marg{text} you can place text.
+Align the text vertically with the |center| and |bottom| arguments.
 \par
-The |\text| macro uses the package tcolorbox and accepts tcolorbox options, for example to set text, frame or background color and transparency.
+The |\text| command uses the package tcolorbox and accepts tcolorbox arguments, for example to set text, frame or background color and transparency.
 The tcolorbox behaves slightly diffenrent then the standalone version: spacings, rules and background are removed by default.
-You can change the behaviour with the tcolorbox macro |\tcbset|\marg{options}.
-Also the |arc| options behaves different: if you set the |arc| to |0pt| the |outer arc| is also set to |0pt|.
+You can change the behaviour with the tcolorbox command |\tcbset|\marg{arguments}.
+Also the |arc| arguments behaves different: if you set the |arc| to |0pt| the |outer arc| is also set to |0pt|.
 \par
-Add the option |breakable| to break text over multiple boxes and pages.
+Add the argument |breakable| to break text over multiple boxes and pages.
 \DescribeMacro{\usetext}
-Use the macro |\usetext|\oarg{name} to place the following text boxes in the grid.
-If you want to use multiple breakable text boxes you can initialize the text with the |name| option and define a name that you then can pass to the |\usetext| option.
+Use the command |\usetext|\oarg{name} to place the following text boxes in the grid.
+If you want to use multiple breakable text boxes you can initialize the text with the |name| argument and define a name that you then can pass to the |\usetext| argument.
 Breakable text boxes may have different heights and positions.
-To align the baselines use the |baselinesnap| option and set the baseline dimension, for example |baselinesnap=\baselineskip|.
+To align the baselines use the |baselinesnap| argument and set the baseline dimension, for example |baselinesnap=\baselineskip|.
 \par
-The |\text| macro accepts the options |shadow|, |shadow size|, |shadow color|, |shadow opacity|, |shadow xshift|, |shadow yshift|, |border|, |border width|,\break |border color| and |border radius|.
+The |\text| command accepts the arguments |shadow|, |shadow size|, |shadow color|, |shadow opacity|, |shadow xshift|, |shadow yshift|, |border|, |border width|,\break |border color| and |border radius|.
 Read more about shadows and borders in section~\ref{subsec:borders}.
 
 \subsection{Graphics}
 
 \DescribeMacro{\newgraphic}
-Create a reusable graphic version with the |\newgraphic|\marg{name}\marg{options} macro.
-Define the options |scale| (>1), |hpos| and |vpos| (0-1) to set the clipping of the graphic.
-With the option |file| you can link a file.
+Create a reusable graphic version with the |\newgraphic|\marg{name}\marg{arguments} command.
+Define the arguments |scale| (>1), |hpos| and |vpos| (0-1) to set the clipping of the graphic.
+With the argument |file| you can link a file.
 If no file is defined, the name is used as the file name.
 
 \DescribeMacro{\graphic}
-The |\graphic|\oarg{options}\marg{name} macro places a graphic.
-The name references a graphic version created with the |\newgraphic| macro.
-If no graphic version with the given name exists, the macro uses the name as the file name.
+The command |\graphic|\oarg{arguments}\marg{name} places a graphic.
+The name references a graphic version created with the command |\newgraphic|.
+If no graphic version with the given name exists, the command uses the name as the file name.
 
 The graphic is scaled to fit in the content box.
 If the aspect ratio of the graphic differs from that of the defined content box, the graphic is cropped.
-You can change the cropping by defining relative decimal values for the options |scale| (>1), |hpos| and |vpos| (0-1).
-With the |orientation| option you can set the Exif orientation flag (1-8).
-To flip a graphic horizontally or vertically use the options |hflip| or |vflip|.
-Same as the |\text| macro, the |\graphic| macro accepts the |border| and |shadow| options described in section~\ref{subsec:borders}.
+You can change the cropping by defining relative decimal values for the arguments |scale| (>1), |hpos| and |vpos| (0-1).
+With the |orientation| argument you can set the Exif orientation flag (1-8).
+To flip a graphic horizontally or vertically use the arguments |hflip| or |vflip|.
+Same as the |\text| command, the |\graphic| command accepts the |border| and |shadow| arguments described in section~\ref{subsec:borders}.
 
 \DescribeMacro{\graphicspath}
-You can use the macro |\graphicspath|\marg{dir-list} of the graphics package to specify a list of directories in which to search for graphic files.
+You can use the command |\graphicspath|\marg{dir-list} of the graphics package to specify a list of directories in which to search for graphic files.
 
 \subsection{Other}
 
 \DescribeMacro{\xput}
-The macro |\xput|\marg{code} is an easy way to place arbitrary content in the grid.
+The command |\xput|\marg{code} is an easy way to place arbitrary content in the grid.
 Within the code block the dimensions |\width| and |\height| represent the size of the content area and can be used to create graphics, that fit and adapt to the available size.
 \par
 \DescribeMacro{\tikzgraphic}
-The macro |\tikzgraphic|\marg{tikz code} works like the |\xput| macro, but wraps your input in a |tikzpicture|.
+The command |\tikzgraphic|\marg{tikz code} works like the |\xput| command, but wraps your input in a |tikzpicture|.
 
 \subsection{Shadows and Borders}\label{subsec:borders}
 
 Text and graphic content can be placed with a border or a shadow.
-You can define a border or shadow for a specific content box by using the options |border width|, |border color|, |border radius| to add a border or |shadow size|, |shadow color|, |shadow opacity|, |shadow xshift|, |shadow yshift| to add a shadow.
+You can define a border or shadow for a specific content box by using the arguments |border width|, |border color|, |border radius| to add a border or |shadow size|, |shadow color|, |shadow opacity|, |shadow xshift|, |shadow yshift| to add a shadow.
 \par
 \DescribeMacro{\newborder}
 \DescribeMacro{\newshadow}
-Define a reusable border or shadow with the |\newborder|\marg{name}\marg{options} or |\newshadow|\marg{name}\marg{options} macros.
-Apply the border or shadow to |\text| or |\graphic| with the option |border| or |shadow|.
+Define a reusable border or shadow with the |\newborder|\marg{name}\marg{arguments} or |\newshadow|\marg{name}\marg{arguments} commands.
+Apply the border or shadow to |\text| or |\graphic| with the argument |border| or |shadow|.
 \par
 \DescribeMacro{\setborder}
 \DescribeMacro{\setshadow}
-To set a border or shadow within a page or document scope, use the macros |\setborder|\oarg{options}\marg{name} or |\setshadow|\oarg{options}\marg{name}.
+To set a border or shadow within a page or document scope, use the commands |\setborder|\oarg{arguments}\marg{name} or |\setshadow|\oarg{arguments}\marg{name}.
 
 \section{Templates}\label{sec:templates}
 
 \DescribeMacro{\newtemplate}
-With the macro |\newtemplate|\marg{name}\marg{layout} you can create a reusable layout.
+With the command |\newtemplate|\marg{name}\marg{layout} you can create a reusable layout.
 Creating a template works the same way as creating a page.
 In addition to graphics and text you can define placeholders.
 \DescribeMacro{\placeholder}
-Use the macro |\placeholder|\marg{fromrow fromcell torow tocell} to define a content area that can later be filled with a text or a graphic.
+Use the command |\placeholder|\marg{fromrow fromcell torow tocell} to define a content area that can later be filled with a text or a graphic.
 
 \DescribeMacro{\template}
-To use a template use the macro |\template|\oarg{options}\marg{name}\marg{content}.
-The available options are the same as for pages.
+Use a template with the command |\template|\oarg{arguments}\marg{name}\marg{content}.
+The available arguments are the same as for pages.
 
-The macro |\template| comes with an easy way to generate templates by using a name pattern.
+The command |\template| comes with an easy way to generate templates by using a name pattern.
 For example the template name \textit{sp} creates a template with a square and a portrait format placeholder.
 In this case the letter |s| specifies a square (1:1) and the letter |p| a portrait (2:3) format placeholder.
 Use the letter |l| to define a landscape ratio (3:2), |g| for golden ratio (5:3), |o| for golden upright ratio (3:5), |w| for wide ratio (2:1) or |f| for a flexible ratio.
@@ -454,23 +454,23 @@ Within a row you can mix the fixed placeholders (|s|, |p|, |l|, |g|, |o|, |w|) o
 \section{Image Optimization}\label{sec:optimization}
 
 \DescribeMacro{\optimize}
-With the macro |\optimize|\oarg{options} you can enable image optimization.
+With the command |\optimize|\oarg{arguments} you can enable image optimization.
 When enabled, JPG and PNG images are croped, resized and cached.
 This results in fast rebuilds when changing the document.
-You can set the options |density|, |quality|, |unsharp| and |downsample threshold|.
-The |density| option takes a number of the pixels per inch (default |300|), the |quality| option takes numbers between 1 and 100, the |unsharp| option an ImageMagick unsharp configuration (default |2x1|) and the |downsample threshold| a decimal value greater or equal 1 (default |1.2|).
-The |unsharp| option can also be applied for individual graphics.
+You can set the arguments |density|, |quality|, |unsharp| and |downsample threshold|.
+The |density| argument takes a number of the pixels per inch (default |300|), the |quality| argument takes numbers between 1 and 100, the |unsharp| argument an ImageMagick unsharp configuration (default |2x1|) and the |downsample threshold| a decimal value greater or equal 1 (default |1.2|).
+The |unsharp| argument can also be applied for individual graphics.
 \par
 If you use image optimization and change the original graphics files, you must delete the cached versions so that the cache will update.
 \DescribeMacro{\import}
-The |\import| macro helps you to streamline this process.
+The |\import| command helps you to streamline this process.
 When enabled, you need an import directory in which to place the modified files.
 When the document is created, the files are moved to your image directory and the corresponding cached versions are automatically regenerated.
 The import directory is either the directory \emph{import} in your working directory.
 Or you can set a system wide import directory by defining the shell variable |PAGELAYOUT_IMPORT_DIRECTORY|.
 \par
 \DescribeMacro{\preflight}
-Use the |\preflight| macro to proof the image resolution.
+Use the |\preflight| command to proof the image resolution.
 If images have a final resolution less then 300 ppi you get a warning, if less then 200 ppi you get an error.
 With preflight enabled the maximum possible resolution is shown next to each graphic.
 
