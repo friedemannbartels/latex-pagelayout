@@ -1,0 +1,69 @@
+%%
+%% Copyright (c) 2022-2023 by Friedemann Bartels
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3c or later is part of all distributions of
+%% LaTeX version 2008/05/04 or later.
+%%
+
+\documentclass[bleed=3mm,grid,graphpaper]{pagelayout}
+\usepackage{microtype}
+\usepackage{tgheros}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+
+\renewcommand*\familydefault{\sfdefault}
+\titlespacing*{\section}{0pt}{.83\baselineskip}{.52\baselineskip}
+
+\margin=5mm
+\bottommargin=10mm
+\topmargin=10mm
+\pagewidth=10cm
+\pageheight=10cm
+\gutter=4mm
+
+% \nogrid
+% \nographpaper
+
+\setgrid{{{1}{1}}}
+
+\begin{document}
+
+  \page{
+    \setgrid{
+      {[1]{1!}{1!}}
+      {{}{}}
+    }
+    \place{0 0 2 1}
+    \text[breakable,baselinesnap=\baselineskip]{
+      \strut
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Int\strut eger sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus.
+    }
+    \place{0 1 1 2}
+    \graphic{1x1}
+    \place{1 1 2 2}
+    \usetext
+  }
+
+  \page{
+    \setgrid{
+      {[1]{1!}{1!}}
+      {{}{}}
+    }
+    \graphic{1x1}
+    \place{1 0 2 1}
+    \text[breakable,name=next,baselinesnap=12pt]{
+      \strut
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, conse\strut ctetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus.
+    }
+    \place{0 1 2 2}
+    \usetext[next]
+  }
+
+\end{document}

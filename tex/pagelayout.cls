@@ -85,7 +85,7 @@
 \newdimen\pal@topsafetymargin\newdimen\pal@bottomsafetymargin\newdimen\pal@innersafetymargin\newdimen\pal@outersafetymargin
 \newdimen\pal@topmargin\newdimen\pal@topmargintmp\newdimen\pal@innermargin\newdimen\pal@bottommargin\newdimen\pal@outermargin
 \newdimen\pal@gutter
-\newdimen\pal@x\newdimen\pal@y\newdimen\pal@xx\newdimen\pal@yy\newdimen\width\newdimen\height\newdimen\x\newdimen\y
+\newdimen\pal@x\newdimen\pal@y\newdimen\pal@xx\newdimen\pal@yy\newdimen\pal@yytmp\newdimen\width\newdimen\height\newdimen\x\newdimen\y
 \newdimen\pal@gridoffsethorizontal\newdimen\pal@gridoffsetvertical\newdimen\pal@gridoffsethorizontaln\newdimen\pal@gridoffsetverticaln
 \newdimen\pal@graphpaperx\newdimen\pal@graphpapery\newdimen\pal@graphpaperoffset\newdimen\pal@graphpapersnap
 
@@ -1882,6 +1882,7 @@
   colframe/.store in=\pal@defaultbordercolor,
   opacityframe/.store in=\pal@defaultborderopacity,
   breakable/.is if=pal@text@option@breakable,
+  % baselinesnap/.store in=\pal@text@option@baselinesnap,
   .unknown/.code=,
   library/.unknown/.code=,
 }
@@ -1919,6 +1920,7 @@
   height/.code={\originaltcbset{height=#1}\def\pal@text@option@height{#1}},
   parbox/.is if=pal@text@option@parbox,
   breakable/.is if=pal@text@option@breakable,
+  baselinesnap/.store in=\pal@text@option@baselinesnap,
   border radius/.code={\originaltcbset{arc=#1}\ifdim\pal@null=\dimexpr#1\relax\originaltcbset{outer arc=#1}\else\originaltcbset{auto outer arc}\fi\def\pal@defaultborderradius{#1}},
   arc/.forward to=/text/border radius,
   border width/.forward to=/text/boxrule,
@@ -1933,6 +1935,7 @@
   .unknown/.code={\originaltcbset{\pgfkeyscurrentname=#1}}
 }
 \newdimen\pal@tcbheight
+\newcount\pal@breakabletextindex
 \newcommand\pal@puttext[5]{
   \ifpal@isbatchmode
   \else
@@ -2001,6 +2004,14 @@
         \fi
 
         \ifpal@text@option@breakable
+          \global\expandafter\edef\csname pal@breakabletext@name@\the\pal@breakabletextindex\endcsname{\pal@text@option@name}
+          \global\expandafter\edef\csname pal@breakabletext@breakat@\pal@text@option@name\endcsname{\the\height}
+          \global\expandafter\edef\csname pal@breakabletext@startat@\pal@text@option@name\endcsname{\the\pal@yy}
+          \ifdefined\pal@text@option@baselinesnap
+            \global\expandafter\edef\csname pal@breakabletext@baselinesnap@\pal@text@option@name\endcsname{\pal@text@option@baselinesnap}
+          \fi
+          % \errmessage{\the\pal@yy, \the\pal@y, \the\height, \the\pageheight}
+          \global\advance\pal@breakabletextindex by 1
           \expandafter\xdef\csname pal@textarray@\pal@text@option@name @offsetx\endcsname{\pal@text@option@leftrule}
           \expandafter\xdef\csname pal@textarray@\pal@text@option@name @offsety\endcsname{\pal@text@option@bottomrule}
         \else
@@ -2019,7 +2030,8 @@
               standard jigsaw,
               width=\width,
               enforce breakable,
-              break at=\height,
+              break at=\ifcsname pal@breakable@\pal@text@option@name\endcsname\csname pal@breakable@\pal@text@option@name\endcsname\else\height\fi,
+              % break at=\height/\height/\height/\height/\height/\height/46.633pt/\height,
               height fixed for=all,
               reset box array=\pal@text@option@name,
               store to box array=\pal@text@option@name,
@@ -2094,6 +2106,7 @@
     \fi
   \fi
 }
+
 \newcommand\pal@putusetext[5][default]{
   \ifpal@isbatchmode
   \else
@@ -2101,6 +2114,24 @@
     \pal@xx=\posx{-1}{#4}{-1}{#5}
     \pal@y=\posy{-1}{#4}
     \pal@yy=\posy{1}{#2}
+    \ifdim\csname pal@breakabletext@startat@#1\endcsname=\the\pal@yy
+    \else
+      \ifcsname pal@breakabletext@baselinesnap@#1\endcsname
+        \pal@yytmp=\dimexpr\csname pal@breakabletext@startat@#1\endcsname\relax
+        \ifdim\pal@yytmp>\pal@yy
+          \loop
+            \pal@yytmp=\dimexpr\pal@yytmp-\csname pal@breakabletext@baselinesnap@#1\endcsname\relax
+          \ifdim\pal@yytmp>\pal@yy\repeat
+        \else
+          \ifdim\dimexpr\pal@yytmp+\csname pal@breakabletext@baselinesnap@#1\endcsname\relax<\pal@yy
+            \loop
+              \pal@yytmp=\dimexpr\pal@yytmp+\csname pal@breakabletext@baselinesnap@#1\endcsname\relax
+            \ifdim\dimexpr\pal@yytmp+\csname pal@breakabletext@baselinesnap@#1\endcsname\relax<\pal@yy\repeat
+          \fi
+        \fi
+        \pal@yy=\pal@yytmp
+      \fi
+    \fi
     \width=\dimexpr(\pal@xx - \pal@x)\relax
     \height=\dimexpr(\pal@yy - \pal@y)\relax
     \pal@textboxwidth=\dimexpr(\pal@xx - \pal@x)\relax
@@ -2109,6 +2140,7 @@
     \pal@checkvisibility
     \ifpal@isvisible
       \ifcsname pal@textarray@#1@index\endcsname
+        \global\expandafter\edef\csname pal@breakabletext@breakat@#1\endcsname{\csname pal@breakabletext@breakat@#1\endcsname/\the\height}
         \global\expandafter\advance\csname pal@textarray@#1@index\endcsname by 1%
 
         \pal@y=\dimexpr\pal@yy-\pal@textboxheight\relax
@@ -3784,6 +3816,12 @@
   \fi
 }
 \AtEndDocument{
+  \ifnum\pal@breakabletextindex>0
+    \loop
+      \advance\pal@breakabletextindex by -1
+      \immediate\write\@auxout{\gdef\string\pal@breakable@\csname pal@breakabletext@name@\the\pal@breakabletextindex\endcsname{\csname pal@breakabletext@breakat@\csname pal@breakabletext@name@\the\pal@breakabletextindex\endcsname\endcsname}}
+    \ifnum\pal@breakabletextindex>0\repeat
+  \fi
   \ifpal@beginleft
     \ifpal@leftpage
       \pal@hasoddnumberofpagestrue
