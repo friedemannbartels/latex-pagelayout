@@ -1,6 +1,6 @@
 ![The pagelayout LaTeX class](doc/banner.svg)
 
-The pagelayout class enables you to layout pages declaratively using simple macros for pages, covers, grids, templates, text, and graphics to create graphic rich, perfectly typeset, and print ready PDFs.
+The pagelayout class enables you to design pages declaratively using simple macros for pages, covers, grids, templates, text, and graphics to create graphic rich, perfectly typeset, and print ready PDFs.
 
 The integration of [Inkscape](https://inkscape.org) allows your to create box shadows. Text shadows and SVG filters are ideas for future releases.
 
@@ -10,23 +10,27 @@ The pagelayout class also integrates the [TikZ](https://www.ctan.org/pkg/pgf) an
 
 ## Quick Start
 
-### Generic Templates
+### Pages
 
-Generic templates are the easiest way to put content on a page. The template name describes the layout. You can arrange [l]andscape, [p]ortrait, [s]quare, [w]ide, [g]olden ratio, g[o]lden upright ratio or [f]lexible placeholders in rows [-]. A valid template name for example is `sg-ff`. Notice you cannot combine flexible with fixed aspect ratio placeholders within a row.
+Create a page with the `\page` command. A grid with rows and cells helps you to arrange content. Use the `\setgrid` command to define your grid. The following example shows a grid with one row containing two cells.
 
 ```latex
-\template{ff}{
-  \text{
-    This text fills the first placeholder.
+\page{
+  \setgrid{
+    {{}{}}
   }
+  \text[breakable]{
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat.
+  }
+  \usetext
 }
 ```
 
-![Generic template](doc/quickstart-1.svg)
+![A page with a two column layout](doc/quickstart-1.svg)
 
-### Custom Templates
+### Templates
 
-You can use the grid to layout content on a page. The grid has rows with cells. You can set width relations between cells and height relations between rows. You can give cells a explicit aspect ratio by adding a `!`.
+You can set width relations between grid cells and height relations between grid rows. You can give cells a explicit aspect ratio by adding a `!`. With the `\newtemplate` command you can create reusable layouts.
 
 ```latex
 \newtemplate{my template}{
@@ -34,31 +38,36 @@ You can use the grid to layout content on a page. The grid has rows with cells. 
     {[2]{3!}{2!}}
   }
   \placeholder{0 0 1 1}
+  \placeholder{0 1 1 2}
 }
 
 \template{my template}{}
 ```
 
-![Custom template](doc/quickstart-2.svg)
+![A template with two placeholders](doc/quickstart-2.svg)
 
-You can set margin and gutter for a single grid, on document level, or on page level.
+You can set margin and gutter at grid, page, or document level.
 
 ### Graphics
 
 You can scale and position a graphic. And you can add borders and box shadows to graphics and text frames.
 
 ```latex
-\newborder{my border}{width=2mm, color=white, radius=5mm}
-\newshadow{my shadow}{size=8}
+\newborder{my border}{
+  width = 1mm,
+  color = white,
+  radius = 5mm
+}
+\newshadow{my shadow}{size = 7}
 
-\template[margin=7mm]{s}{
+\template{my template}{
   \graphic[
-    scale=1.1,
-    hpos=0.2,
-    unsharp=3x1,
-    shadow=my shadow,
-    border=my border,
-    border radius=0mm
+    scale = 1.1,
+    vpos = 0.3,
+    unsharp = 3x1,
+    shadow = my shadow,
+    border = my border,
+    border radius = 0mm
   ]{kopi}
 }
 ```
