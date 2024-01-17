@@ -82,7 +82,7 @@ For a complete reference, read the [manual](doc/pagelayout-manual.pdf).
 
 In general, you should use the package manager shipped with your TeX distribution to install the pagelayout package.
 
-To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/v1.0.5/pagelayout.tds.zip) to your local TeX directory tree and run the command `texhash`.
+To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/1.1.0/pagelayout-1.1.0.tds.zip) to your local TeX directory tree and run the command `texhash`.
 
 To enable image optimization, shadow creation, and preflight, perform these installation steps:
 
