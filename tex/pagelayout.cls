@@ -372,7 +372,11 @@
   \pal@outermargin=\ifdim\pal@gridoutermargin=\pal@undefdim\pal@gridmargin\else\pal@gridoutermargin\fi
 
   \height=\dimexpr\pal@pageheight - \pal@topmargin - \pal@bottommargin\relax
-  \width=\dimexpr\pal@pagewidth - \pal@innermargin - \pal@outermargin\relax
+  \ifpal@isdoublepage
+    \width=\dimexpr2\pal@pagewidth - 2\pal@outermargin\relax
+  \else
+    \width=\dimexpr\pal@pagewidth - \pal@innermargin - \pal@outermargin\relax
+  \fi
   \ifdim\dimexpr\pal@gridoptionheight\relax=\pal@undefdim
   \else
     \pal@gridheightdiff=\dimexpr0.5\height - 0.5\dimexpr\pal@gridoptionheight\relax\relax

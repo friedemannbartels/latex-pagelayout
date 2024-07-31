@@ -1,0 +1,33 @@
+\documentclass[fanfold]{pagelayout}
+
+\gutter=5mm
+\bleed=3mm
+
+\placeholders\safezone
+
+\newtemplate[double]{test}{
+  \setgrid[width=(\width-2\gutter)/3,x=\margin]{
+    {{}}
+    {{}}
+  }
+  \placeholder{}
+  \placeholder{}
+
+  \setgrid[width=(\width-2\gutter)/3,height=\pageheight]{
+    {{}}
+  }
+  \placeholder{}
+
+  \setgrid[width=(\width-2\gutter)/3,x=(\width-2\gutter)/3*2+2\gutter+\margin]{
+    {{}}
+    {{}}
+  }
+  \placeholder{}
+  \placeholder{}
+}
+
+\begin{document}
+
+  \template{test}{}
+
+\end{document}
