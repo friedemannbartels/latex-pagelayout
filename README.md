@@ -1,4 +1,4 @@
-![The pagelayout LaTeX class](doc/banner.svg)
+![The pagelayout LaTeX class](https://raw.githubusercontent.com/friedemannbartels/latex-pagelayout/1.1.1/doc/banner.svg)
 
 The pagelayout class enables you to design pages declaratively using simple macros for pages, covers, grids, templates, text, and graphics to create graphic rich, perfectly typeset, and print ready PDFs.
 
@@ -26,7 +26,7 @@ Create a page with the `\page` command. A grid with rows and cells helps you to 
 }
 ```
 
-![A page with a two column layout](doc/quickstart-1.svg)
+![A page with a two column layout](https://raw.githubusercontent.com/friedemannbartels/latex-pagelayout/1.1.1/doc/quickstart-1.svg)
 
 ### Templates
 
@@ -44,7 +44,7 @@ You can set width relations between grid cells and height relations between grid
 \template{my template}{}
 ```
 
-![A template with two placeholders](doc/quickstart-2.svg)
+![A template with two placeholders](https://raw.githubusercontent.com/friedemannbartels/latex-pagelayout/1.1.1/doc/quickstart-2.svg)
 
 You can set margin and gutter at grid, page, or document level.
 
@@ -72,17 +72,17 @@ You can scale and position a graphic. And you can add borders and box shadows to
 }
 ```
 
-![Photo with border and shadow](doc/quickstart-3.svg)
+![Photo with border and shadow](https://raw.githubusercontent.com/friedemannbartels/latex-pagelayout/1.1.1/doc/quickstart-3.svg)
 
-Have a look at the [examples](doc) to learn how to create double pages, covers, and more.
+Have a look at the [examples](https://github.com/friedemannbartels/latex-pagelayout/tree/1.1.1/doc) to learn how to create double pages, covers, and more.
 
-For a complete reference, read the [manual](doc/pagelayout-manual.pdf).
+For a complete reference, read the [manual](https://raw.githubusercontent.com/friedemannbartels/latex-pagelayout/1.1.1/doc/pagelayout-manual.pdf).
 
 ## Installation
 
 In general, you should use the package manager shipped with your TeX distribution to install the pagelayout package.
 
-To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/1.1.0/pagelayout-1.1.0.tds.zip) to your local TeX directory tree and run the command `texhash`.
+To install manually, copy the contents of [pagelayout.tds.zip](https://github.com/friedemannbartels/latex-pagelayout/releases/download/1.1.1/pagelayout.tds.zip) to your local TeX directory tree and run the command `texhash`.
 
 To enable image optimization, shadow creation, and preflight, perform these installation steps:
 
